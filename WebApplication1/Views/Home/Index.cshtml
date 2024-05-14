@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LorderonMusic</title>
+    <link rel="stylesheet" href="bot.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="music-svgrepo-com.svg" type="image/png">
+</head>
+<body>
+    <div class="LorderonMusic">
+        <h1>LorderonMusic</h1>
+    </div>
+    <video autoplay loop muted class="bgvideo" id="bgvideo">
+        <source src="nonamenosocks - phantom (1).mp4" type="video/mp4"></source>
+    </video>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <main>
+        <form class="music-form">
+            <input class="text_into_input_color" type="text" placeholder="Ссылка на трек или название">
+            <button><img class="lupa" src="free-icon-search-4024513.png"></img></button>
+        </form>
+        <div class="queue"></div>
+    </main>
+    <script src="bot.js"></script>
+</body>
+</html>
