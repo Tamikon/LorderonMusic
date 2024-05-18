@@ -12,16 +12,15 @@
     <link rel="shortcut icon" href="music-svgrepo-com.svg" type="image/png">
 </head>
 <body>
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Log in with Discord to see your servers.</p>
-        <a class="btn btn-primary" href="/login">Log in with Discord</a>
-    </div>
+    <form action="/Authorization/Auth/Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
     <div class="LorderonMusic">
         <h1>LorderonMusic</h1>
     </div>
     <video autoplay loop muted class="bgvideo" id="bgvideo">
-        <source src="nonamenosocks - phantom (1).mp4" type="video/mp4">
+        <source src="nonamenosocks - phantom (1).mp4" type="video/mp4"></source>
     </video>
 
     <main>
