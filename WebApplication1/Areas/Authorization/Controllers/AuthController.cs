@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApplication1.Areas.Authorization.Models;
-using WebApplication1.Models;
+using WebApplication1.Areas.Home.Models;
 
 namespace WebApplication1.Areas.Authorization.Controllers
 {
@@ -58,12 +59,12 @@ namespace WebApplication1.Areas.Authorization.Controllers
             return RedirectToAction("Index", "Auth", new { area = "Authorization" });
         }
 
-        [HttpPost("logout")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> logout()
         {
-            //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home", new { area = "Home" });
         }
     }
 }

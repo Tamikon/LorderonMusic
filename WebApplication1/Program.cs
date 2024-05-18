@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using WebApplication1.Areas.Authorization.Models;
-using WebApplication1.Models;
+using WebApplication1.Areas.Home.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +87,6 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

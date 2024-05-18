@@ -1,4 +1,4 @@
-﻿using WebApplication1.Models;
+﻿using WebApplication1.Areas.Home.Models;
 
 namespace WebApplication1.Areas.Authorization.Models;
 public class UserStore
