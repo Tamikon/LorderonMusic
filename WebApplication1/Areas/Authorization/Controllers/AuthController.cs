@@ -11,6 +11,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
     [Area("Authorization")]
     public class AuthController : Controller
     {
+
         private readonly UserStore userStore;
 
         public AuthController(UserStore userStore)
