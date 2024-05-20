@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,22 +11,13 @@
     <link rel="shortcut icon" href="music-svgrepo-com.svg" type="image/png">
 </head>
 <body>
-    <form action="/Authorization/Auth/Logout" method="post">
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-    <div class="LorderonMusic">
-        <h1>LorderonMusic</h1>
-    </div>
     <video autoplay loop muted class="bgvideo" id="bgvideo">
         <source src="nonamenosocks - phantom (1).mp4" type="video/mp4"></source>
     </video>
 
+    <div class="welcome-message"></div>
+
     <main>
-        <form class="music-form">
-            <input class="text_into_input_color" type="text" placeholder="Ссылка на трек или название">
-            <button><img class="lupa" src="free-icon-search-4024513.png"></img></button>
-        </form>
         <div class="queue"></div>
     </main>
     <script src="bot.js"></script>

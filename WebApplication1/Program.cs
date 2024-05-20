@@ -7,6 +7,7 @@ using System.Text.Json;
 using WebApplication1.Areas.Authorization.Models;
 using WebApplication1.Areas.Home.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
@@ -95,3 +96,4 @@ app.MapControllerRoute(
     pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
