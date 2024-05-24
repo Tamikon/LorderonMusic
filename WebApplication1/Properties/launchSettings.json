@@ -13,7 +13,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:44338",
+      "applicationUrl": "http://localhost:10810", // Убедитесь, что это HTTP URL
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -22,7 +22,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7039;http://localhost:44338",
+      "applicationUrl": "https://localhost:7039", // Убедитесь, что это HTTPS URL
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

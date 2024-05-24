@@ -10,6 +10,8 @@ using WebApplication1.Areas.Home.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Configure(builder.Configuration.GetSection("Kestrel"));

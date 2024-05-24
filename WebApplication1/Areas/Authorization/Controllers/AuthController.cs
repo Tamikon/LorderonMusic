@@ -23,6 +23,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
         {
             return View();
         }
+
         [HttpGet("login")]
         public IActionResult Login(string returnUrl = "/Authorization/Auth/Index")
         {
