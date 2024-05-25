@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApplication1.Areas.Authorization.Models;
 using WebApplication1.Areas.Home.Models;
+using DatabaseService.Models;
 
 namespace WebApplication1.Areas.Authorization.Controllers
 {
     [Area("Authorization")]
     public class AuthController : Controller
     {
-
         private readonly UserStore userStore;
 
         public AuthController(UserStore userStore)
@@ -23,6 +22,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
         {
             return View();
         }
+
         [HttpGet("login")]
         public IActionResult Login(string returnUrl = "/Authorization/Auth/Index")
         {
@@ -48,13 +48,27 @@ namespace WebApplication1.Areas.Authorization.Controllers
 
             if (!string.IsNullOrEmpty(discordId))
             {
-                var user = new User
+                var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+                var user = new WebApplication1.Areas.Home.Models.User
                 {
                     DiscordId = discordId,
                     Username = username,
-                    AvatarUrl = $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png"
+                    AvatarUrl = avatarUrl,
+                    FirstAuthorizationDate = DateTime.UtcNow,
+                    Guilds = new List<string>() // Здесь нужно будет заполнить список гильдий
                 };
-                userStore.AddUser(user);
+
+                var dbUser = new DatabaseService.Models.User
+                {
+                    DiscordId = user.DiscordId,
+                    Username = user.Username,
+                    AvatarUrl = user.AvatarUrl,
+                    FirstAuthorizationDate = user.FirstAuthorizationDate,
+                    Guilds = user.Guilds
+                };
+
+                await userStore.AddOrUpdateUser(dbUser);
             }
 
             return RedirectToAction("Index", "Auth", new { area = "Authorization" });
@@ -62,7 +76,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> logout()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home", new { area = "Home" });

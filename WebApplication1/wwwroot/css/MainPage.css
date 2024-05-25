@@ -1,0 +1,26 @@
+﻿body {
+    background-color: #121212;
+    color: white;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+}
+
+.main-content {
+    padding: 20px;
+    height: 100%;
+}
+
+.playlist-item {
+    transition: transform 0.3s ease;
+}
+
+.playlist-item:hover {
+    transform: scale(1.05);
+}
+
+.container-fluid {
+    height: 100%;
+}

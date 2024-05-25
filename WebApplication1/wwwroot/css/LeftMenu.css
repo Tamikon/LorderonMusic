@@ -1,0 +1,29 @@
+﻿/* styles.css */
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.row {
+    height: 100%;
+}
+
+.sidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.logout-button {
+    margin-top: auto;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.container-fluid {
+    height: 100%;
+}

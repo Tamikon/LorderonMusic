@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Authentication;
+using DatabaseService;
+using DatabaseService.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using WebApplication1;
 using WebApplication1.Areas.Authorization.Models;
-using WebApplication1.Areas.Home.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +12,12 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.Configure(builder.Configuration.GetSection("Kestrel"));
 });
 
+// Регистрация контекста базы данных и репозитория пользователей
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -21,56 +25,12 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = "Discord";
 })
 .AddCookie()
-.AddOAuth("Discord", options =>
-{
-    options.ClientId = builder.Configuration["Discord:ClientId"];
-    options.ClientSecret = builder.Configuration["Discord:ClientSecret"];
-    options.CallbackPath = new PathString("/auth/callback");
-
-    options.AuthorizationEndpoint = "https://discord.com/api/oauth2/authorize";
-    options.TokenEndpoint = "https://discord.com/api/oauth2/token";
-    options.UserInformationEndpoint = "https://discord.com/api/users/@me";
-
-    options.Scope.Add("identify");
-    options.Scope.Add("guilds");
-
-    options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
-    options.ClaimActions.MapJsonKey(ClaimTypes.Name, "username");
-    options.ClaimActions.MapJsonKey("urn:discord:avatar", "avatar");
-
-    options.Events = new OAuthEvents
-    {
-        OnCreatingTicket = async context =>
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, options.UserInformationEndpoint);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-
-            var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
-            response.EnsureSuccessStatusCode();
-
-            var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-
-            var userId = user.RootElement.GetString("id");
-            var username = user.RootElement.GetString("username");
-            var avatar = user.RootElement.GetString("avatar");
-
-            context.RunClaimActions(user.RootElement);
-
-            var userStore = context.HttpContext.RequestServices.GetRequiredService<UserStore>();
-            userStore.AddUser(new User
-            {
-                DiscordId = userId,
-                Username = username,
-                AvatarUrl = avatar
-            });
-        }
-    };
-});
+.AddOAuth("Discord", options => DiscordAuthenticationHandler.ConfigureOAuth(options, builder.Services.BuildServiceProvider()));
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<UserStore>();
+// Изменяем срок жизни UserStore на scoped
+builder.Services.AddScoped<UserStore>();
 
 var app = builder.Build();
 

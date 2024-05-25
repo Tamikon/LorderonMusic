@@ -10,15 +10,8 @@ namespace WebApplication1.Areas.Home.Controllers
         [Area("Home")]
         public async Task<IActionResult> IndexAsync()
         {
-            //logout();
             return View();
         }
 
-        //[HttpPost("logout")]
-        //[ValidateAntiForgeryToken]
-        //public async void logout()
-        //{
-        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //}
     }
 }

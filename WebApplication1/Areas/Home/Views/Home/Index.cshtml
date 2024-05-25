@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,29 +7,38 @@
     <link rel="stylesheet" href="bot.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Rubik+Doodle+Shadow&family=Satisfy&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="music-svgrepo-com.svg" type="image/png">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/WelcomePage.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Log in with Discord to see your servers.</p>
-        <a class="btn btn-primary" href="/login">Log in with Discord</a>
+    <div class="container">
+        <div class="content">
+            <div class="welcome-message">Welcome to Lordaeron, traveler.</div>
+        </div>
+        <div class="text-center login-btn">
+            <a class="btn btn-primary" href="/login">Log in with Discord</a>
+        </div>
     </div>
-    <div class="LorderonMusic">
-        <h1>LorderonMusic</h1>
-    </div>
+
     <video autoplay loop muted class="bgvideo" id="bgvideo">
         <source src="nonamenosocks - phantom (1).mp4" type="video/mp4">
     </video>
+    <div class="overlay" id="overlay"></div>
 
     <main>
-        <form class="music-form">
-            <input class="text_into_input_color" type="text" placeholder="Ссылка на трек или название">
-            <button><img class="lupa" src="free-icon-search-4024513.png"></img></button>
-        </form>
         <div class="queue"></div>
     </main>
     <script src="bot.js"></script>
 </body>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/WelcomePage.js" asp-append-version="true"></script>
 </html>
+
+@{
+    Layout = "";
+}
