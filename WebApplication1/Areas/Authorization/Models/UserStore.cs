@@ -1,27 +1,43 @@
-﻿using WebApplication1.Areas.Home.Models;
+﻿using DatabaseService;
+using DatabaseService.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Areas.Authorization.Models
 {
     public class UserStore
     {
-        private readonly List<User> users = new();
+        private readonly IUserRepository _userRepository;
 
-        public void AddUser(User user)
+        public UserStore(IUserRepository userRepository)
         {
-            if (!users.Any(u => u.DiscordId == user.DiscordId))
+            _userRepository = userRepository;
+        }
+
+        public async Task AddOrUpdateUser(User user)
+        {
+            var existingUser = await _userRepository.GetUser(user.DiscordId);
+            if (existingUser == null)
             {
-                users.Add(user);
+                await _userRepository.AddUser(user);
+            }
+            else
+            {
+                existingUser.Username = user.Username;
+                existingUser.AvatarUrl = user.AvatarUrl;
+                existingUser.Guilds = user.Guilds;
+                await _userRepository.UpdateUser(existingUser);
             }
         }
 
-        public User GetUser(string discordId)
+        public async Task<User> GetUser(string discordId)
         {
-            return users.FirstOrDefault(u => u.DiscordId == discordId);
+            return await _userRepository.GetUser(discordId);
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            return users;
+            return await _userRepository.GetAllUsers();
         }
     }
 }

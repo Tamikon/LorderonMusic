@@ -3,9 +3,10 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using WebApplication1.Areas.Authorization.Models;
+using DatabaseService;
+using DatabaseService.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
-using WebApplication1.Areas.Home.Models;
 
 namespace WebApplication1
 {
@@ -51,24 +52,16 @@ namespace WebApplication1
                     var avatar = user.RootElement.GetString("avatar");
                     var guilds = await GetUserGuildsAsync(context.AccessToken, context.Backchannel, context.HttpContext.RequestAborted);
 
-                    var existingUser = userStore.GetUser(userId);
-                    if (existingUser == null)
+                    var discordUser = new User
                     {
-                        userStore.AddUser(new User
-                        {
-                            DiscordId = userId,
-                            Username = username,
-                            AvatarUrl = avatar,
-                            FirstAuthorizationDate = DateTime.UtcNow,
-                            Guilds = guilds
-                        });
-                    }
-                    else
-                    {
-                        existingUser.Username = username;
-                        existingUser.AvatarUrl = avatar;
-                        existingUser.Guilds = guilds;
-                    }
+                        DiscordId = userId,
+                        Username = username,
+                        AvatarUrl = avatar,
+                        FirstAuthorizationDate = DateTime.UtcNow,
+                        Guilds = guilds
+                    };
+
+                    await userStore.AddOrUpdateUser(discordUser);
                 }
             };
         }
