@@ -26,12 +26,12 @@ namespace DatabaseService
 
         public async Task<User> GetUser(string discordId)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.DiscordId == discordId);
+            return await _context.Users.Include(u => u.Servers).FirstOrDefaultAsync(u => u.DiscordId == discordId);
         }
 
         public async Task<List<User>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u => u.Servers).ToListAsync();
         }
 
         public async Task UpdateUser(User user)

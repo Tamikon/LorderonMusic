@@ -9,6 +9,6 @@ namespace DatabaseService
         Task AddUser(User user);
         Task<User> GetUser(string discordId);
         Task<List<User>> GetAllUsers();
-        Task UpdateUser(User user); // Новый метод для обновления пользователя
+        Task UpdateUser(User user);
     }
 }

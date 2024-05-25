@@ -50,7 +50,7 @@ namespace WebApplication1
                     var userId = user.RootElement.GetString("id");
                     var username = user.RootElement.GetString("username");
                     var avatar = user.RootElement.GetString("avatar");
-                    var guilds = await GetUserGuildsAsync(context.AccessToken, context.Backchannel, context.HttpContext.RequestAborted);
+                    var servers = await GetUserServersAsync(context.AccessToken, context.Backchannel, context.HttpContext.RequestAborted);
 
                     var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{userId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
 
@@ -60,16 +60,15 @@ namespace WebApplication1
                         Username = username,
                         AvatarUrl = avatarUrl,
                         FirstAuthorizationDate = DateTime.UtcNow,
-                        Guilds = guilds
+                        Servers = servers
                     };
 
                     await userStore.AddOrUpdateUser(discordUser);
                 }
             };
-
         }
 
-        private static async Task<List<string>> GetUserGuildsAsync(string accessToken, HttpClient backchannel, CancellationToken cancellationToken)
+        private static async Task<List<Server>> GetUserServersAsync(string accessToken, HttpClient backchannel, CancellationToken cancellationToken)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "https://discord.com/api/users/@me/guilds");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -79,9 +78,14 @@ namespace WebApplication1
             response.EnsureSuccessStatusCode();
 
             var guilds = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-            var guildIds = guilds.RootElement.EnumerateArray().Select(g => g.GetProperty("id").GetString()).ToList();
+            var servers = guilds.RootElement.EnumerateArray().Select(g => new Server
+            {
+                DiscordServerId = g.GetProperty("id").GetString(),
+                Name = g.GetProperty("name").GetString(),
+                Playlists = new List<Playlist>() 
+            }).ToList();
 
-            return guildIds;
+            return servers;
         }
     }
 }

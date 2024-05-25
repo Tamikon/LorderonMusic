@@ -12,11 +12,12 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.Configure(builder.Configuration.GetSection("Kestrel"));
 });
 
-// Регистрация контекста базы данных и репозитория пользователей
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+builder.Services.AddScoped<ITrackRepository, TrackRepository>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -28,8 +29,6 @@ builder.Services.AddAuthentication(options =>
 .AddOAuth("Discord", options => DiscordAuthenticationHandler.ConfigureOAuth(options, builder.Services.BuildServiceProvider()));
 
 builder.Services.AddControllersWithViews();
-
-// Изменяем срок жизни UserStore на scoped
 builder.Services.AddScoped<UserStore>();
 
 var app = builder.Build();

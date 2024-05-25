@@ -56,7 +56,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
                     Username = username,
                     AvatarUrl = avatarUrl,
                     FirstAuthorizationDate = DateTime.UtcNow,
-                    Guilds = new List<string>() // Здесь нужно будет заполнить список гильдий
+                    Servers = new List<WebApplication1.Areas.Home.Models.Server>()
                 };
 
                 var dbUser = new DatabaseService.Models.User
@@ -65,7 +65,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
                     Username = user.Username,
                     AvatarUrl = user.AvatarUrl,
                     FirstAuthorizationDate = user.FirstAuthorizationDate,
-                    Guilds = user.Guilds
+                    Servers = new List<DatabaseService.Models.Server>()
                 };
 
                 await userStore.AddOrUpdateUser(dbUser);
