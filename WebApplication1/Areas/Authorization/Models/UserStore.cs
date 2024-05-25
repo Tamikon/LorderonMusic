@@ -1,25 +1,27 @@
 ﻿using WebApplication1.Areas.Home.Models;
 
-namespace WebApplication1.Areas.Authorization.Models;
-public class UserStore
+namespace WebApplication1.Areas.Authorization.Models
 {
-    private readonly List<User> users = new();
-
-    public void AddUser(User user)
+    public class UserStore
     {
-        if (!users.Any(u => u.DiscordId == user.DiscordId))
+        private readonly List<User> users = new();
+
+        public void AddUser(User user)
         {
-            users.Add(user);
+            if (!users.Any(u => u.DiscordId == user.DiscordId))
+            {
+                users.Add(user);
+            }
         }
-    }
 
-    public User GetUser(string discordId)
-    {
-        return users.FirstOrDefault(u => u.DiscordId == discordId);
-    }
+        public User GetUser(string discordId)
+        {
+            return users.FirstOrDefault(u => u.DiscordId == discordId);
+        }
 
-    public List<User> GetAllUsers()
-    {
-        return users;
+        public List<User> GetAllUsers()
+        {
+            return users;
+        }
     }
 }
