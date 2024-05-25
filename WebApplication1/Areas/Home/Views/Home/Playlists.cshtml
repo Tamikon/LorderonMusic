@@ -1,5 +1,92 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlists</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/MainPage.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container-fluid">
+        @await Html.PartialAsync("LeftMenu")
+        <div class="row">
+            <!-- Include the left menu -->
+            <div class="col-md-2">
+                <!-- Using PHP include for example, adjust according to your backend technology -->
+                <?php include 'menu.html'; ?>
+            </div>
+            <div class="col-md-10">
+                <!-- Main content -->
+                <div class="container mt-3">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкаст">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button class="btn btn-secondary">Вечеринка</button>
+                            <button class="btn btn-secondary">В дороге</button>
+                            <button class="btn btn-secondary">Заряд энергии</button>
+                            <button class="btn btn-secondary">Релакс</button>
+                            <button class="btn btn-secondary">Веселая</button>
+                            <button class="btn btn-secondary">Романтика</button>
+                            <button class="btn btn-secondary">Грустная</button>
+                            <button class="btn btn-secondary">Сон</button>
+                            <button class="btn btn-secondary">Тренировка</button>
+                            <button class="btn btn-secondary">Концентрация</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <h3>ПОХОЖЕ НА: Eternxlkz</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="path/to/BrazilianPhonk.png" class="img-fluid" alt="Brazilian Phonk">
+                            <p>Brazilian Phonk</p>
+                            <p>Crazy Mano, DJ FKU, RXDXVIL, TRASHXRL</p>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="path/to/GIGACHADFUNK.png" class="img-fluid" alt="GIGACHAD FUNK">
+                            <p>GIGACHAD FUNK (Remixes)</p>
+                            <p>EP • DJ FKU and TRXVELER</p>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="path/to/GamingPhonk.png" class="img-fluid" alt="Gaming Phonk">
+                            <p>Gaming Phonk</p>
+                            <p>Kordhell, Ghostface Playa, iAmJakeHill, Mc Menor do...</p>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="path/to/TRASHXRL.png" class="img-fluid" alt="TRASHXRL">
+                            <p>TRASHXRL</p>
+                            <p>173 тыс. подписчиков</p>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="path/to/ChillPhonk.png" class="img-fluid" alt="Chill Phonk">
+                            <p>Chill Phonk</p>
+                            <p>...</p>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="path/to/NewPhonk2024.png" class="img-fluid" alt="New Phonk 2024">
+                            <p>свежий phonk 2024</p>
+                            <p>NUEKI, TOLCHONOV, Bibi Babydoll, RXDXVIL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
 @{
+    Layout = "";
 }
