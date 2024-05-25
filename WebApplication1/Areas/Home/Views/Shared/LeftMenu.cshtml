@@ -18,12 +18,16 @@
                         <a class="nav-link text-white" asp-area="Home" asp-controller="Home" asp-action="Index">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="Home" asp-controller="Home" asp-action="Playlists">Плейлисты</a>
+                        <form action="/PlayList/PlayList/Index" method="post" class="playlist-button">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">PlayList</button>
+                        </form>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="Home" asp-controller="Home" asp-action="Reference">Справка</a>
                     </li>
                 </ul>
+
                 <form action="/Authorization/Auth/Logout" method="post" class="logout-button">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-danger">Logout</button>

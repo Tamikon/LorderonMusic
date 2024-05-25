@@ -15,4 +15,8 @@
     <ProjectReference Include="..\DatabaseService\DatabaseService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\PlayList\Model\" />
+  </ItemGroup>
+
 </Project>
