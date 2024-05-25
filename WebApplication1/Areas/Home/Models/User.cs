@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Areas.Home.Models
+﻿using DatabaseService.Models;
+
+namespace WebApplication1.Areas.Home.Models
 {
     public class User
     {
@@ -6,6 +8,6 @@
         public string Username { get; set; }
         public string AvatarUrl { get; set; }
         public DateTime FirstAuthorizationDate { get; set; }
-        public List<string> Guilds { get; set; }
+        public List<Server> Servers { get; set; } = new List<Server>();
     }
 }

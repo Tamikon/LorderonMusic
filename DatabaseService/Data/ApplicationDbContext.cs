@@ -11,11 +11,31 @@ namespace DatabaseService.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Server> Servers { get; set; }
+        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Track> Tracks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<Server>().HasKey(s => s.Id);
+            modelBuilder.Entity<Playlist>().HasKey(p => p.Id);
+            modelBuilder.Entity<Track>().HasKey(t => t.Id);
+
             modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
+                .HasMany(u => u.Servers)
+                .WithOne(s => s.User)
+                .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<Server>()
+                .HasMany(s => s.Playlists)
+                .WithOne(p => p.Server)
+                .HasForeignKey(p => p.ServerId);
+
+            modelBuilder.Entity<Playlist>()
+                .HasMany(p => p.Tracks)
+                .WithOne(t => t.Playlist)
+                .HasForeignKey(t => t.PlaylistId);
         }
     }
 }
