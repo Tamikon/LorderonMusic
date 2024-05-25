@@ -1,42 +1,24 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LorderonMusic</title>
-    <link rel="stylesheet" href="bot.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Rubik+Doodle+Shadow&family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="music-svgrepo-com.svg" type="image/png">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/WelcomePage.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <title>Music Recommendation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/MainPage.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <div class="welcome-message">Welcome to Lordaeron, traveler.</div>
-        </div>
-        <div class="text-center login-btn">
-            <a class="btn btn-primary" href="/login">Log in with Discord</a>
+    <div class="container-fluid">
+        @await Html.PartialAsync("LeftMenu")
+        <div class="col-md-10 main-content">
+            <div class="search-bar">
+                <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+            </div>
         </div>
     </div>
-
-    <video autoplay loop muted class="bgvideo" id="bgvideo">
-        <source src="nonamenosocks - phantom (1).mp4" type="video/mp4">
-    </video>
-    <div class="overlay" id="overlay"></div>
-
-    <main>
-        <div class="queue"></div>
-    </main>
-    <script src="bot.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/WelcomePage.js" asp-append-version="true"></script>
 </html>
 
 @{
