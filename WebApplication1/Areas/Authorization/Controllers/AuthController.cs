@@ -25,7 +25,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
         }
 
         [HttpGet("login")]
-        public IActionResult Login(string returnUrl = "/Authorization/Auth/Index")
+        public IActionResult Login(string returnUrl = "/Home/Home/Index")
         {
             var properties = new AuthenticationProperties { RedirectUri = returnUrl };
             return Challenge(properties, "Discord");
@@ -66,7 +66,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
         public async Task<IActionResult> logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home", new { area = "Home" });
+            return RedirectToAction("Index");
         }
     }
 }

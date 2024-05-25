@@ -1,26 +1,15 @@
-﻿body {
-    background-color: #121212;
-    color: white;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 10px;
+﻿.container-fluid {
+    padding-left: 0; /* Убираем отступ слева для контейнера, чтобы выровнять его с левым меню */
 }
 
 .main-content {
-    padding: 20px;
-    height: 100%;
+    padding-left: 250px; /* Отступ слева для основного контента, чтобы учесть ширину левого меню */
 }
 
-.playlist-item {
-    transition: transform 0.3s ease;
+.search-bar {
+    margin-top: 20px; /* Отступ сверху для поисковой строки */
 }
 
-.playlist-item:hover {
-    transform: scale(1.05);
-}
-
-.container-fluid {
-    height: 100%;
+.search-bar input {
+    width: calc(100% - 20px); /* Занимаем всю доступную ширину, за вычетом отступов слева и справа */
 }
