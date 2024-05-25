@@ -48,11 +48,13 @@ namespace WebApplication1.Areas.Authorization.Controllers
 
             if (!string.IsNullOrEmpty(discordId))
             {
+                var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
+
                 var user = new WebApplication1.Areas.Home.Models.User
                 {
                     DiscordId = discordId,
                     Username = username,
-                    AvatarUrl = $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png",
+                    AvatarUrl = avatarUrl,
                     FirstAuthorizationDate = DateTime.UtcNow,
                     Guilds = new List<string>() // Здесь нужно будет заполнить список гильдий
                 };

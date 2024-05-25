@@ -52,11 +52,13 @@ namespace WebApplication1
                     var avatar = user.RootElement.GetString("avatar");
                     var guilds = await GetUserGuildsAsync(context.AccessToken, context.Backchannel, context.HttpContext.RequestAborted);
 
+                    var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{userId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
+
                     var discordUser = new User
                     {
                         DiscordId = userId,
                         Username = username,
-                        AvatarUrl = avatar,
+                        AvatarUrl = avatarUrl,
                         FirstAuthorizationDate = DateTime.UtcNow,
                         Guilds = guilds
                     };
@@ -64,6 +66,7 @@ namespace WebApplication1
                     await userStore.AddOrUpdateUser(discordUser);
                 }
             };
+
         }
 
         private static async Task<List<string>> GetUserGuildsAsync(string accessToken, HttpClient backchannel, CancellationToken cancellationToken)

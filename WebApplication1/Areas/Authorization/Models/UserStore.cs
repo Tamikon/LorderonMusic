@@ -19,16 +19,21 @@ namespace WebApplication1.Areas.Authorization.Models
             var existingUser = await _userRepository.GetUser(user.DiscordId);
             if (existingUser == null)
             {
+                if (string.IsNullOrEmpty(user.AvatarUrl))
+                {
+                    user.AvatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png"; 
+                }
                 await _userRepository.AddUser(user);
             }
             else
             {
                 existingUser.Username = user.Username;
-                existingUser.AvatarUrl = user.AvatarUrl;
+                existingUser.AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "https://cdn.discordapp.com/embed/avatars/0.png" : user.AvatarUrl;
                 existingUser.Guilds = user.Guilds;
                 await _userRepository.UpdateUser(existingUser);
             }
         }
+
 
         public async Task<User> GetUser(string discordId)
         {
