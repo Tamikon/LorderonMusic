@@ -8,10 +8,19 @@ namespace WebApplication1.Areas.Home.Controllers
     public class HomeController : Controller
     {
         [Area("Home")]
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
             return View();
         }
 
+        public IActionResult Playlists()
+        {
+            return View();
+        }
+
+        public IActionResult Reference()
+        {
+            return View();
+        }
     }
 }
