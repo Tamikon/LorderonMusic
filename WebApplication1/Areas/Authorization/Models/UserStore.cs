@@ -9,9 +9,9 @@ namespace WebApplication1.Areas.Authorization.Models
     {
         private readonly IUserRepository _userRepository;
         private readonly IPlaylistRepository _playlistRepository;
-        private readonly ITrackRepository _trackRepository;
+        private readonly IMusicRepository _trackRepository;
 
-        public UserStore(IUserRepository userRepository, IPlaylistRepository playlistRepository, ITrackRepository trackRepository)
+        public UserStore(IUserRepository userRepository, IPlaylistRepository playlistRepository, IMusicRepository trackRepository)
         {
             _userRepository = userRepository;
             _playlistRepository = playlistRepository;

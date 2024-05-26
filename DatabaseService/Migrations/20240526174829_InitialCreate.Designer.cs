@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240526171824_UpdateMusicModel")]
-    partial class UpdateMusicModel
+    [Migration("20240526174829_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace DatabaseService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Artist")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PlaylistId")
                         .HasColumnType("int");

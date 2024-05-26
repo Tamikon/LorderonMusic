@@ -1,0 +1,27 @@
+﻿@model DatabaseService.Models.Music
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить Музыку</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Добавить Музыку</h1>
+        <form asp-action="AddMusic" method="post">
+            <input type="hidden" name="PlaylistId" value="@Model.PlaylistId" />
+            <div class="form-group">
+                <label for="YouTubeLink">Ссылка на YouTube</label>
+                <input type="text" name="YouTubeLink" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            <a href="@Url.Action("PlaylistDetails", "Home", new { area = "Home", playlistId = Model.PlaylistId })" class="btn btn-secondary">Назад к плейлисту</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

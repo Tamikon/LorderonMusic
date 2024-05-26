@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
-builder.Services.AddScoped<ITrackRepository, TrackRepository>();
+builder.Services.AddScoped<IMusicRepository, MusicRepository>();
 
 builder.Services.AddAuthentication(options =>
 {

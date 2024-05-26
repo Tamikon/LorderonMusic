@@ -19,7 +19,7 @@
                 {
                     <li class="list-group-item">
                         <h5>@music.Title</h5>
-                        <p class="text-muted">@music.YouTubeLink</p>
+                        <p class="text-muted">@music.Artist</p>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@GetYouTubeVideoId(music.YouTubeLink)" allowfullscreen></iframe>
                         </div>
@@ -27,19 +27,9 @@
                 }
             </ul>
 
-            <h4>Добавить новую музыку</h4>
-            <form asp-action="AddMusic" method="post">
-                <input type="hidden" name="playlistId" value="@Model.Id" />
-                <div class="form-group">
-                    <label for="title">Название</label>
-                    <input type="text" name="title" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="youtubeLink">Ссылка на YouTube</label>
-                    <input type="text" name="youtubeLink" class="form-control" required />
-                </div>
-                <button type="submit" class="btn btn-primary">Добавить музыку</button>
-            </form>
+            <div class="mt-4">
+                <a href="@Url.Action("AddMusicForm", "Home", new { area = "Home", playlistId = Model.Id })" class="btn btn-primary">Добавить музыку</a>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

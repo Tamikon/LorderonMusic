@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DatabaseService
 {
-    public class TrackRepository : ITrackRepository
+    public class MusicRepository : IMusicRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public TrackRepository(ApplicationDbContext context)
+        public MusicRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -29,6 +29,11 @@ namespace DatabaseService
         public async Task<List<Music>> GetAllTracks()
         {
             return await _context.Musics.ToListAsync();
+        }
+
+        public async Task<List<Music>> GetTracksByPlaylist(int playlistId)
+        {
+            return await _context.Musics.Where(m => m.PlaylistId == playlistId).ToListAsync();
         }
 
         public async Task UpdateTrack(Music track)

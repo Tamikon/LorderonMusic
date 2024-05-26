@@ -30,6 +30,10 @@ namespace DatabaseService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Artist")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PlaylistId")
                         .HasColumnType("int");
 

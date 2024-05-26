@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseService
 {
-    public interface ITrackRepository
+    public interface IMusicRepository
     {
         Task AddTrack(Music Musics);
         Task<Music> GetTrack(int id);

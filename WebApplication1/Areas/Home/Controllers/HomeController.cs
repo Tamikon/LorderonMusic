@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using DatabaseService;
 using DatabaseService.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using VideoLibrary;
 
 namespace WebApplication1.Areas.Home.Controllers
 {
@@ -10,20 +10,22 @@ namespace WebApplication1.Areas.Home.Controllers
     public class HomeController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPlaylistRepository _playlistRepository;
+        private readonly IMusicRepository _musicRepository;
 
-        public HomeController(IUserRepository userRepository)
+        public HomeController(IUserRepository userRepository, IPlaylistRepository playlistRepository, IMusicRepository musicRepository)
         {
             _userRepository = userRepository;
+            _playlistRepository = playlistRepository;
+            _musicRepository = musicRepository;
         }
 
-        // Метод для отображения всех серверов
         public async Task<IActionResult> Index()
         {
             var servers = await _userRepository.GetAllServers();
             return View(servers);
         }
 
-        // Метод для отображения плейлистов конкретного сервера
         public async Task<IActionResult> ServerDetails(int serverId)
         {
             var server = await _userRepository.GetServer(serverId);
@@ -33,18 +35,6 @@ namespace WebApplication1.Areas.Home.Controllers
             }
 
             return View(server);
-        }
-
-        // Метод для отображения треков в плейлисте
-        public async Task<IActionResult> PlaylistDetails(int playlistId)
-        {
-            var playlist = await _userRepository.GetPlaylist(playlistId);
-            if (playlist == null)
-            {
-                return NotFound();
-            }
-
-            return View(playlist);
         }
 
         [HttpPost]
@@ -57,29 +47,66 @@ namespace WebApplication1.Areas.Home.Controllers
             }
 
             var playlist = new Playlist { Name = playlistName, ServerId = serverId };
-            await _userRepository.AddPlaylist(playlist);
+            await _playlistRepository.AddPlaylist(playlist);
 
             return RedirectToAction("ServerDetails", new { serverId = serverId });
         }
-        [HttpPost]
-        public async Task<IActionResult> AddMusic(int playlistId, string youtubeLink, string title)
+
+        [HttpGet]
+        public IActionResult AddMusicForm(int playlistId)
         {
-            if (string.IsNullOrEmpty(youtubeLink) || string.IsNullOrEmpty(title))
+            var model = new Music { PlaylistId = playlistId };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMusic(int playlistId, string youTubeLink)
+        {
+            if (string.IsNullOrEmpty(youTubeLink))
             {
-                ModelState.AddModelError(string.Empty, "Title and YouTube link cannot be empty.");
-                return RedirectToAction("PlaylistDetails", new { playlistId = playlistId });
+                ModelState.AddModelError(string.Empty, "YouTube link cannot be empty.");
+                return RedirectToAction("AddMusicForm", new { area = "Home", playlistId });
             }
 
-            var playlist = await _userRepository.GetPlaylist(playlistId);
+            var youtube = YouTube.Default;
+            var video = await Task.Run(() => youtube.GetVideo(youTubeLink));
+            var title = video.Title;
+            //var author = video.Autho;
+
+            var music = new Music
+            {
+                PlaylistId = playlistId,
+                Title = title,
+                //Artist = author,
+                YouTubeLink = youTubeLink
+            };
+
+            await _musicRepository.AddTrack(music);
+            return RedirectToAction("PlaylistDetails", new { area = "Home", playlistId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MusicDetails(int musicId)
+        {
+            var music = await _musicRepository.GetTrack(musicId);
+            if (music == null)
+            {
+                return NotFound();
+            }
+
+            return View(music);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PlaylistDetails(int playlistId)
+        {
+            var playlist = await _playlistRepository.GetPlaylist(playlistId);
             if (playlist == null)
             {
                 return NotFound();
             }
 
-            var music = new Music { Title = title, PlaylistId = playlistId, YouTubeLink = youtubeLink };
-            await _userRepository.AddMusic(music);
-
-            return RedirectToAction("PlaylistDetails", new { playlistId = playlistId });
+            return View(playlist);
         }
     }
 }
