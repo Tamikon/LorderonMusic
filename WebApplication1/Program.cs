@@ -19,6 +19,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 builder.Services.AddScoped<IMusicRepository, MusicRepository>();
 
+// Registering IHttpClientFactory
+builder.Services.AddHttpClient();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
