@@ -23,11 +23,17 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="Home" asp-controller="Home" asp-action="Reference">Справка</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Home" asp-controller="Account" asp-action="Index">Мой аккаунт</a>
+                    </li>
                 </ul>
                 <form action="/Authorization/Auth/Logout" method="post" class="logout-button">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-danger">Logout</button>
                 </form>
+            </div>
+            <div class="col-md-10 content">
+                <!-- Add content here -->
             </div>
         </div>
     </div>

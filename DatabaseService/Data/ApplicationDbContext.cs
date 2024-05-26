@@ -5,22 +5,18 @@ namespace DatabaseService.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Server> Servers { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
-        public DbSet<Track> Tracks { get; set; }
+        public DbSet<Music> Musics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
-            modelBuilder.Entity<Server>().HasKey(s => s.Id);
-            modelBuilder.Entity<Playlist>().HasKey(p => p.Id);
-            modelBuilder.Entity<Track>().HasKey(t => t.Id);
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Servers)
@@ -33,9 +29,9 @@ namespace DatabaseService.Data
                 .HasForeignKey(p => p.ServerId);
 
             modelBuilder.Entity<Playlist>()
-                .HasMany(p => p.Tracks)
-                .WithOne(t => t.Playlist)
-                .HasForeignKey(t => t.PlaylistId);
+                .HasMany(p => p.Musics)
+                .WithOne(m => m.Playlist)
+                .HasForeignKey(m => m.PlaylistId);
         }
     }
 }

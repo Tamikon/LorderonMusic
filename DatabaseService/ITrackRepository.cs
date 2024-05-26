@@ -6,9 +6,9 @@ namespace DatabaseService
 {
     public interface ITrackRepository
     {
-        Task AddTrack(Track track);
-        Task<Track> GetTrack(int id);
-        Task<List<Track>> GetAllTracks();
-        Task UpdateTrack(Track track);
+        Task AddTrack(Music Musics);
+        Task<Music> GetTrack(int id);
+        Task<List<Music>> GetAllTracks();
+        Task UpdateTrack(Music Musics);
     }
 }

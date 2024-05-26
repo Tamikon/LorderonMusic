@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<DatabaseService.Models.Server>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -11,8 +13,22 @@
     <div class="container-fluid">
         @await Html.PartialAsync("LeftMenu")
         <div class="col-md-10 main-content">
-            <div class="search-bar">
+            <div class="search-bar mb-3">
                 <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+            </div>
+            <div class="servers-list">
+                <h3>Сервера</h3>
+                <ul class="list-group">
+                    @foreach (var server in Model)
+                    {
+                        <li class="list-group-item">
+                            <img src="@server.AvatarUrl" class="card-img-top" alt="Server Avatar">
+                            <a href="@Url.Action("ServerDetails", "Home", new { serverId = server.Id })">
+                                @server.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
@@ -20,7 +36,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-@{
-    Layout = "";
-}

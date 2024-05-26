@@ -41,9 +41,9 @@ namespace WebApplication1.Areas.Authorization.Models
             await _playlistRepository.AddPlaylist(playlist);
         }
 
-        public async Task AddTrack(Track track)
+        public async Task AddTrack(Music Musics)
         {
-            await _trackRepository.AddTrack(track);
+            await _trackRepository.AddTrack(Musics);
         }
 
         public async Task<List<Playlist>> GetUserPlaylists(string discordId)
@@ -61,10 +61,10 @@ namespace WebApplication1.Areas.Authorization.Models
             return playlists;
         }
 
-        public async Task<List<Track>> GetPlaylistTracks(int playlistId)
+        public async Task<List<Music>> GetPlaylistTracks(int playlistId)
         {
             var playlist = await _playlistRepository.GetPlaylist(playlistId);
-            return playlist?.Tracks ?? new List<Track>();
+            return playlist?.Musics ?? new List<Music>();
         }
     }
 }

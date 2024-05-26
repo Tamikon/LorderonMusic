@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,9 +11,21 @@ namespace DatabaseService.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Guilds",
-                table: "Users");
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiscordId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstAuthorizationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Servers",
@@ -22,6 +35,7 @@ namespace DatabaseService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DiscordServerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -56,26 +70,30 @@ namespace DatabaseService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tracks",
+                name: "Musics",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Artist = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YouTubeLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PlaylistId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tracks", x => x.Id);
+                    table.PrimaryKey("PK_Musics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tracks_Playlists_PlaylistId",
+                        name: "FK_Musics_Playlists_PlaylistId",
                         column: x => x.PlaylistId,
                         principalTable: "Playlists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Musics_PlaylistId",
+                table: "Musics",
+                column: "PlaylistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Playlists_ServerId",
@@ -86,18 +104,13 @@ namespace DatabaseService.Migrations
                 name: "IX_Servers_UserId",
                 table: "Servers",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tracks_PlaylistId",
-                table: "Tracks",
-                column: "PlaylistId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tracks");
+                name: "Musics");
 
             migrationBuilder.DropTable(
                 name: "Playlists");
@@ -105,12 +118,8 @@ namespace DatabaseService.Migrations
             migrationBuilder.DropTable(
                 name: "Servers");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Guilds",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

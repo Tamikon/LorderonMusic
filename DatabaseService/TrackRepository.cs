@@ -15,25 +15,25 @@ namespace DatabaseService
             _context = context;
         }
 
-        public async Task AddTrack(Track track)
+        public async Task AddTrack(Music track)
         {
-            _context.Tracks.Add(track);
+            _context.Musics.Add(track);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Track> GetTrack(int id)
+        public async Task<Music> GetTrack(int id)
         {
-            return await _context.Tracks.FirstOrDefaultAsync(t => t.Id == id);
+            return await _context.Musics.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<List<Track>> GetAllTracks()
+        public async Task<List<Music>> GetAllTracks()
         {
-            return await _context.Tracks.ToListAsync();
+            return await _context.Musics.ToListAsync();
         }
 
-        public async Task UpdateTrack(Track track)
+        public async Task UpdateTrack(Music track)
         {
-            _context.Tracks.Update(track);
+            _context.Musics.Update(track);
             await _context.SaveChangesAsync();
         }
     }

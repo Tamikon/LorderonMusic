@@ -1,0 +1,57 @@
+﻿@model DatabaseService.Models.Playlist
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Треки плейлиста @Model.Name</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/MainPage.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-md-10 main-content">
+            <h2>Плейлист: @Model.Name</h2>
+            <h3>Треки</h3>
+            <ul class="list-group">
+                @foreach (var music in Model.Musics)
+                {
+                    <li class="list-group-item">
+                        <h5>@music.Title</h5>
+                        <p class="text-muted">@music.YouTubeLink</p>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@GetYouTubeVideoId(music.YouTubeLink)" allowfullscreen></iframe>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <h4>Добавить новую музыку</h4>
+            <form asp-action="AddMusic" method="post">
+                <input type="hidden" name="playlistId" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="title">Название</label>
+                    <input type="text" name="title" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="youtubeLink">Ссылка на YouTube</label>
+                    <input type="text" name="youtubeLink" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить музыку</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+@functions {
+    private string GetYouTubeVideoId(string url)
+    {
+        var uri = new Uri(url);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        return query["v"];
+    }
+}
