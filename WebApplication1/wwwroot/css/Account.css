@@ -1,0 +1,55 @@
+﻿/* MyAccount.css */
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    padding-top: 20px;
+    padding-left: 240px; /* Adjusted padding to avoid overlapping with the sidebar */
+}
+
+h1, h2, h5 {
+    color: #ffffff;
+}
+
+.card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card-body {
+    color: #e0e0e0;
+}
+
+.card-text {
+    color: #b0b0b0;
+}
+
+.card-img-top {
+    border-radius: 8px 8px 0 0;
+}
+
+.img-thumbnail {
+    border: none;
+    border-radius: 8px;
+}
+
+.col-md-4 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 100px) {
+    .container {
+        padding-left: 0; /* Remove left padding on smaller screens */
+    }
+}

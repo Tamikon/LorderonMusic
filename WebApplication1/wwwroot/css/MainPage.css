@@ -1,26 +1,85 @@
-﻿body {
+﻿body.dark-theme {
     background-color: #121212;
-    color: white;
+    color: #e0e0e0;
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем отступы */
+    overflow-x: hidden; /* Убираем горизонтальный скролл */
 }
 
-.search-bar {
-    width: 100%;
-    padding: 10px;
+.sidebar {
+    background-color: #1f1f1f;
+    height: 100vh; /* Полная высота окна */
+    position: fixed; /* Фиксированное положение */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 220px; /* Ширина бокового меню */
+    overflow-y: auto;
+    padding-top: 20px;
 }
+
+    .sidebar h4 {
+        color: #ffffff;
+        padding-left: 20px;
+    }
+
+    .sidebar .nav-link {
+        color: #e0e0e0;
+        padding-left: 20px;
+    }
+
+        .sidebar .nav-link:hover {
+            background-color: #333333;
+        }
+
+    .sidebar .logout-button {
+        margin: 20px 20px 20px 20px;
+    }
 
 .main-content {
+    margin-left: 220px; /* Отступ основного контента на ширину бокового меню */
     padding: 20px;
-    height: 100%;
 }
 
-.playlist-item {
-    transition: transform 0.3s ease;
+.search-bar .form-control {
+    background-color: #333333;
+    border: none;
+    color: #e0e0e0;
 }
 
-.playlist-item:hover {
-    transform: scale(1.05);
+    .search-bar .form-control::placeholder {
+        color: #b0b0b0;
+    }
+
+.servers-list h3 {
+    color: #ffffff;
 }
 
-.container-fluid {
-    height: 100%;
+.server-card {
+    background-color: #1f1f1f;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+    .server-card a {
+        color: #76c7c0;
+        text-decoration: none;
+    }
+
+        .server-card a:hover {
+            text-decoration: underline;
+        }
+
+.card-img-top {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+}
+
+.server-name {
+    margin-top: 10px;
+    font-size: 14px;
 }

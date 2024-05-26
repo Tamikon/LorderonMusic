@@ -1,29 +1,38 @@
-﻿/* styles.css */
-body, html {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
-.row {
-    height: 100%;
-}
-
+﻿/* LeftMenu.css */
 .sidebar {
-    height: 100%;
+    background-color: #1f1f1f;
+    height: 100vh; /* Полная высота окна */
+    position: fixed; /* Фиксированное положение */
+    top: 0;
+    left: 0;
+    width: 220px; /* Ширина бокового меню */
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Разделение пространства */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow-y: auto;
 }
 
-.logout-button {
-    margin-top: auto;
-}
+    .sidebar h4 {
+        color: #ffffff;
+        padding-left: 20px;
+    }
 
-.section-title {
-    margin-top: 20px;
-    font-size: 24px;
-}
+    .sidebar .nav-link {
+        color: #e0e0e0;
+        padding-left: 20px;
+    }
 
-.container-fluid {
-    height: 100%;
-}
+        .sidebar .nav-link:hover {
+            background-color: #333333;
+        }
+
+    .sidebar .nav {
+        flex-grow: 1;
+    }
+
+    .sidebar .logout-button {
+        display: flex;
+        justify-content: left;
+    }

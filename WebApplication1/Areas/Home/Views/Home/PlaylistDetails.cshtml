@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Треки плейлиста @Model.Name</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/css/MainPage.css" rel="stylesheet" />
+    <link href="~/css/PlaylistDetails.css" rel="stylesheet" />
+    <link href="~/css/LeftMenu.css" rel="stylesheet" />
 </head>
-<body>
+<body class="dark-theme">
+    <div class="sidebar">
+        @await Html.PartialAsync("LeftMenu")
+    </div>
     <div class="container-fluid">
-        <div class="col-md-10 main-content">
+        <div class="main-content">
             <h2>Плейлист: @Model.Name</h2>
             <h3>Треки</h3>
             <ul class="list-group">
@@ -44,4 +48,8 @@
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
         return query["v"];
     }
+}
+
+@{
+    Layout = "";
 }

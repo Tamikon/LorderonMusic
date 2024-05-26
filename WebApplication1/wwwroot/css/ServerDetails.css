@@ -1,0 +1,94 @@
+﻿/* MainPage.css */
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    background-color: #1f1f1f;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+    .sidebar h4 {
+        color: #ffffff;
+        padding-left: 20px;
+    }
+
+    .sidebar .nav-link {
+        color: #e0e0e0;
+        padding-left: 20px;
+    }
+
+        .sidebar .nav-link:hover {
+            background-color: #333333;
+        }
+
+    .sidebar .logout-button {
+        margin: 20px 20px 20px 20px;
+    }
+
+.container-fluid {
+    padding-top: 20px;
+    padding-left: 240px; /* Add padding to avoid overlapping with the sidebar */
+}
+
+.main-content {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #e0e0e0;
+}
+
+h2, h3, h4 {
+    color: #ffffff;
+}
+
+.list-group-item {
+    background-color: #2a2a2a;
+    border: 1px solid #333333;
+    color: #e0e0e0;
+}
+
+.list-group-item a {
+    color: #76c7c0;
+    text-decoration: none;
+}
+
+    .list-group-item a:hover {
+        text-decoration: underline;
+    }
+
+.form-group label {
+    color: #ffffff;
+}
+
+.form-control {
+    background-color: #333333;
+    border: 1px solid #444444;
+    color: #e0e0e0;
+}
+
+    .form-control::placeholder {
+        color: #b0b0b0;
+    }
+
+.btn-primary {
+    background-color: #76c7c0;
+    border-color: #76c7c0;
+}
+
+    .btn-primary:hover {
+        background-color: #5fb2a6;
+        border-color: #5fb2a6;
+    }

@@ -8,10 +8,14 @@
     <title>Плейлисты сервера @Model.Name</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/MainPage.css" rel="stylesheet" />
+    <link href="~/css/LeftMenu.css" rel="stylesheet" />
 </head>
-<body>
+<body class="dark-theme">
+    <div class="sidebar">
+        @await Html.PartialAsync("LeftMenu")
+    </div>
     <div class="container-fluid">
-        <div class="col-md-10 main-content">
+        <div class="main-content col-md-10 offset-md-2">
             <h2>Сервер: @Model.Name</h2>
             <h3>Плейлисты</h3>
             <ul class="list-group">
@@ -40,3 +44,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+@{
+    Layout = "";
+}
