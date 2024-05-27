@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using WebApplication1.Areas.Authorization.Models;
@@ -7,6 +6,7 @@ using DatabaseService;
 using DatabaseService.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace WebApplication1
 {
@@ -78,12 +78,25 @@ namespace WebApplication1
             response.EnsureSuccessStatusCode();
 
             var guilds = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-            var servers = guilds.RootElement.EnumerateArray().Select(g => new Server
+            var servers = new List<Server>();
+
+            foreach (var guild in guilds.RootElement.EnumerateArray())
             {
-                DiscordServerId = g.GetProperty("id").GetString(),
-                Name = g.GetProperty("name").GetString(),
-                Playlists = new List<Playlist>() 
-            }).ToList();
+                var icon = guild.GetProperty("icon").GetString();
+                var avatarUrl = !string.IsNullOrEmpty(icon)
+                    ? $"https://cdn.discordapp.com/icons/{guild.GetProperty("id").GetString()}/{icon}.png"
+                    : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+                var server = new Server
+                {
+                    DiscordServerId = guild.GetProperty("id").GetString(),
+                    Name = guild.GetProperty("name").GetString(),
+                    AvatarUrl = avatarUrl,
+                    Playlists = new List<Playlist>()
+                };
+
+                servers.Add(server);
+            }
 
             return servers;
         }

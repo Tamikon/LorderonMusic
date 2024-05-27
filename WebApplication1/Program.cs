@@ -17,7 +17,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
-builder.Services.AddScoped<ITrackRepository, TrackRepository>();
+builder.Services.AddScoped<IMusicRepository, MusicRepository>();
+
+// Registering IHttpClientFactory
+builder.Services.AddHttpClient();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -51,6 +54,6 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Authorization}/{controller=Auth}/{action=Index}/{id?}");
 
 app.Run();

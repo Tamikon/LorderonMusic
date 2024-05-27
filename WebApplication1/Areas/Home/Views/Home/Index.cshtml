@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<DatabaseService.Models.Server>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -6,13 +8,32 @@
     <title>Music Recommendation</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/MainPage.css" rel="stylesheet" />
+    <link href="~/css/LeftMenu.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="container-fluid">
+<body class="dark-theme">
+    <div class="sidebar">
         @await Html.PartialAsync("LeftMenu")
-        <div class="col-md-10 main-content">
-            <div class="search-bar">
-                <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+    </div>
+    <div class="main-content">
+        <div class="search-bar mb-3">
+            <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+        </div>
+        <div class="servers-list">
+            <h3>Сервера</h3>
+            <div class="row">
+                @foreach (var server in Model)
+                {
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="server-card">
+                            <a href="@Url.Action("ServerDetails", "Home", new { serverId = server.Id })" class="d-block text-center">
+                                <img src="@server.AvatarUrl" class="card-img-top mx-auto" alt="Server Avatar">
+                                <div class="server-name mt-2">
+                                    @server.Name
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

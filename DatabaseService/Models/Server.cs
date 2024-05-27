@@ -9,6 +9,7 @@ namespace DatabaseService.Models
         public int Id { get; set; }
         public string DiscordServerId { get; set; }
         public string Name { get; set; }
+        public string AvatarUrl { get; set; }
         public List<Playlist> Playlists { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

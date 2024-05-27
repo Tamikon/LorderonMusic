@@ -1,0 +1,82 @@
+﻿body {
+    background-color: #202225;
+    color: #DCDDDE;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2F3136;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2F3136;
+    padding: 20px;
+    margin-left: 250px; /* Adjust to account for sidebar */
+}
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #40444B;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+    background-color: #2F3136;
+    color: #DCDDDE;
+    border: none;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.form-control:focus {
+    background-color: #2F3136;
+    color: #DCDDDE;
+    border-color: #7289DA;
+    box-shadow: none;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #7289DA;
+    margin-right: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #5b6eae;
+}
+
+.btn-secondary {
+    background-color: #2F3136;
+    color: #DCDDDE;
+}
+
+.btn-secondary:hover {
+    background-color: #40444B;
+}
+
+label {
+    color: #B9BBBE;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+}

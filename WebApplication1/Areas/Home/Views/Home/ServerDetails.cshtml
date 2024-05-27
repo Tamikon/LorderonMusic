@@ -1,0 +1,52 @@
+﻿@model DatabaseService.Models.Server
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Плейлисты сервера @Model.Name</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/ServerDetails.css" rel="stylesheet" />
+    <link href="~/css/LeftMenu.css" rel="stylesheet" />
+</head>
+<body class="dark-theme">
+    <div class="sidebar">
+        @await Html.PartialAsync("LeftMenu")
+    </div>
+    <div class="container-fluid">
+        <div class="main-content">
+            <h2>Сервер: @Model.Name</h2>
+            <h3>Плейлисты</h3>
+            <div class="playlist-grid">
+                @foreach (var playlist in Model.Playlists)
+                {
+                    <div class="playlist-item">
+                        <a href="@Url.Action("PlaylistDetails", "Home", new { playlistId = playlist.Id })">
+                            <img src="~/musicIcon.jpg" alt="@playlist.Name" />
+                            <span>@playlist.Name</span>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="form-container">
+                <h4>Добавить новый плейлист</h4>
+                <form asp-action="AddPlaylist" method="post">
+                    <input type="hidden" name="serverId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="playlistName">Название плейлиста</label>
+                        <input type="text" name="playlistName" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить плейлист</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+@{
+    Layout = "";
+}

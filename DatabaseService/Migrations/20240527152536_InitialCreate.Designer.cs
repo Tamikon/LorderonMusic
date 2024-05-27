@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240525173502_InitialCreate")]
+    [Migration("20240527152536_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,36 @@ namespace DatabaseService.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DatabaseService.Models.Music", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Artist")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlaylistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YouTubeLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaylistId");
+
+                    b.ToTable("Musics");
+                });
 
             modelBuilder.Entity("DatabaseService.Models.Playlist", b =>
                 {
@@ -55,6 +85,10 @@ namespace DatabaseService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AvatarUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DiscordServerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -71,36 +105,6 @@ namespace DatabaseService.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Servers");
-                });
-
-            modelBuilder.Entity("DatabaseService.Models.Track", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Artist")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PlaylistId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaylistId");
-
-                    b.ToTable("Tracks");
                 });
 
             modelBuilder.Entity("DatabaseService.Models.User", b =>
@@ -131,6 +135,17 @@ namespace DatabaseService.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DatabaseService.Models.Music", b =>
+                {
+                    b.HasOne("DatabaseService.Models.Playlist", "Playlist")
+                        .WithMany("Musics")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+                });
+
             modelBuilder.Entity("DatabaseService.Models.Playlist", b =>
                 {
                     b.HasOne("DatabaseService.Models.Server", "Server")
@@ -153,20 +168,9 @@ namespace DatabaseService.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DatabaseService.Models.Track", b =>
-                {
-                    b.HasOne("DatabaseService.Models.Playlist", "Playlist")
-                        .WithMany("Tracks")
-                        .HasForeignKey("PlaylistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Playlist");
-                });
-
             modelBuilder.Entity("DatabaseService.Models.Playlist", b =>
                 {
-                    b.Navigation("Tracks");
+                    b.Navigation("Musics");
                 });
 
             modelBuilder.Entity("DatabaseService.Models.Server", b =>
