@@ -66,9 +66,9 @@ namespace WebApplication1.Areas.Home.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMusic(int playlistId, string youTubeLink)
         {
-            if (string.IsNullOrEmpty(youTubeLink))
+            if (string.IsNullOrEmpty(youTubeLink) || !IsValidYouTubeLink(youTubeLink))
             {
-                ModelState.AddModelError(string.Empty, "YouTube link cannot be empty.");
+                ModelState.AddModelError(string.Empty, "The YouTube link is not valid.");
                 return RedirectToAction("AddMusicForm", new { area = "Home", playlistId });
             }
 
@@ -146,6 +146,17 @@ namespace WebApplication1.Areas.Home.Controllers
             }
 
             return View(playlist);
+        }
+        private bool IsValidYouTubeLink(string url)
+        {
+            var regex = new System.Text.RegularExpressions.Regex(@"^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|music\.youtube\.com\/watch\?v=).+$");
+            if (!regex.IsMatch(url))
+            {
+                return false;
+            }
+
+            var videoId = GetYouTubeVideoId(url);
+            return !string.IsNullOrEmpty(videoId);
         }
 
         private class YouTubeVideoInfo
