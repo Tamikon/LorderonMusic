@@ -1,94 +1,85 @@
-﻿/* MainPage.css */
-body.dark-theme {
-    background-color: #121212;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+﻿body.dark-theme {
+    background-color: #202225;
+    color: #DCDDDE;
 }
-
-.sidebar {
-    background-color: #1f1f1f;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 220px;
-    overflow-y: auto;
-    padding-top: 20px;
-}
-
-    .sidebar h4 {
-        color: #ffffff;
-        padding-left: 20px;
-    }
-
-    .sidebar .nav-link {
-        color: #e0e0e0;
-        padding-left: 20px;
-    }
-
-        .sidebar .nav-link:hover {
-            background-color: #333333;
-        }
-
-    .sidebar .logout-button {
-        margin: 20px 20px 20px 20px;
-    }
-
+/* Контейнер с основным содержимым */
 .container-fluid {
-    padding-top: 20px;
-    padding-left: 240px; /* Add padding to avoid overlapping with the sidebar */
+    padding-left: 240px; /* Отступ, чтобы учесть ширину бокового меню */
+}
+/* Основное содержимое */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+/* Сетка плейлистов */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+}
+/* Элементы плейлистов */
+.playlist-item {
+    background-color: #2F3136;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    padding: 10px;
 }
 
-.main-content {
-    background-color: #1f1f1f;
+    .playlist-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .playlist-item img {
+        width: 100px; /* Ограничение ширины */
+        height: 100px; /* Ограничение высоты */
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .playlist-item a {
+        color: #7289DA;
+        text-decoration: none;
+        display: block;
+        font-size: 0.9rem;
+    }
+/* Контейнер для формы */
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #40444B;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
 }
-
-h2, h3, h4 {
-    color: #ffffff;
-}
-
-.list-group-item {
-    background-color: #2a2a2a;
-    border: 1px solid #333333;
-    color: #e0e0e0;
-}
-
-.list-group-item a {
-    color: #76c7c0;
-    text-decoration: none;
-}
-
-    .list-group-item a:hover {
-        text-decoration: underline;
-    }
-
-.form-group label {
-    color: #ffffff;
-}
-
+/* Стили для поля ввода и кнопок */
 .form-control {
-    background-color: #333333;
-    border: 1px solid #444444;
-    color: #e0e0e0;
+    background-color: #2F3136;
+    color: #DCDDDE;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
 }
 
-    .form-control::placeholder {
-        color: #b0b0b0;
+    .form-control:focus {
+        background-color: #2F3136;
+        color: #DCDDDE;
+        border-color: #7289DA;
+        box-shadow: none;
     }
 
 .btn-primary {
-    background-color: #76c7c0;
-    border-color: #76c7c0;
+    background-color: #7289DA;
+    border: none;
 }
 
     .btn-primary:hover {
-        background-color: #5fb2a6;
-        border-color: #5fb2a6;
+        background-color: #5b6eae;
     }
