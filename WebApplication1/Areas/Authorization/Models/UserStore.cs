@@ -30,7 +30,33 @@ namespace WebApplication1.Areas.Authorization.Models
                 existingUser.Username = user.Username;
                 existingUser.AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "https://cdn.discordapp.com/embed/avatars/0.png" : user.AvatarUrl;
                 existingUser.FirstAuthorizationDate = user.FirstAuthorizationDate;
-                existingUser.Servers = user.Servers;
+
+                foreach (var server in user.Servers)
+                {
+                    var existingServer = existingUser.Servers.Find(s => s.DiscordServerId == server.DiscordServerId);
+                    if (existingServer == null)
+                    {
+                        existingUser.Servers.Add(server);
+                    }
+                    else
+                    {
+                        existingServer.Name = server.Name;
+                        existingServer.AvatarUrl = server.AvatarUrl;
+                        foreach (var playlist in server.Playlists)
+                        {
+                            var existingPlaylist = existingServer.Playlists.Find(p => p.Id == playlist.Id);
+                            if (existingPlaylist == null)
+                            {
+                                existingServer.Playlists.Add(playlist);
+                            }
+                            else
+                            {
+                                existingPlaylist.Name = playlist.Name;
+                                existingPlaylist.Musics = playlist.Musics;
+                            }
+                        }
+                    }
+                }
 
                 await _userRepository.UpdateUser(existingUser);
             }
@@ -41,9 +67,9 @@ namespace WebApplication1.Areas.Authorization.Models
             await _playlistRepository.AddPlaylist(playlist);
         }
 
-        public async Task AddTrack(Music Musics)
+        public async Task AddTrack(Music music)
         {
-            await _trackRepository.AddTrack(Musics);
+            await _trackRepository.AddTrack(music);
         }
 
         public async Task<List<Playlist>> GetUserPlaylists(string discordId)

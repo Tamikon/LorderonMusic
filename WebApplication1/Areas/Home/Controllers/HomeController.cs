@@ -53,7 +53,7 @@ namespace WebApplication1.Areas.Home.Controllers
             var playlist = new Playlist { Name = playlistName, ServerId = serverId };
             await _playlistRepository.AddPlaylist(playlist);
 
-            return RedirectToAction("ServerDetails", new { serverId = serverId });
+            return RedirectToAction("ServerDetails", new { serverId });
         }
 
         [HttpGet]
