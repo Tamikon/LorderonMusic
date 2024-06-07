@@ -2,9 +2,7 @@
 using System.Security.Claims;
 using System.Text.Json;
 using WebApplication1.Areas.Authorization.Models;
-using DatabaseService;
 using DatabaseService.Models;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 

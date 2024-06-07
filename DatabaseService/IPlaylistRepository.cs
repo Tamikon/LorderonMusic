@@ -1,6 +1,4 @@
 ﻿using DatabaseService.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DatabaseService
 {
@@ -8,7 +6,5 @@ namespace DatabaseService
     {
         Task AddPlaylist(Playlist playlist);
         Task<Playlist> GetPlaylist(int id);
-        Task<List<Playlist>> GetAllPlaylists();
-        Task UpdatePlaylist(Playlist playlist);
     }
 }

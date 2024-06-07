@@ -22,7 +22,7 @@
                 @foreach (var playlist in Model.Playlists)
                 {
                     <div class="playlist-item">
-                        <a href="@Url.Action("PlaylistDetails", "Home", new { playlistId = playlist.Id })">
+                        <a href="@Url.Action("PlaylistDetails", "PlaylistDetails", new { playlistId = playlist.Id })">
                             <img src="~/musicIcon.jpg" alt="@playlist.Name" />
                             <span>@playlist.Name</span>
                         </a>

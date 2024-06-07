@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using DatabaseService;
 using System.Security.Claims;
 
