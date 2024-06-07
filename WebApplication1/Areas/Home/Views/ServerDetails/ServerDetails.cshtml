@@ -16,7 +16,10 @@
     </div>
     <div class="container-fluid">
         <div class="search-bar mb-3">
-            <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+            <form asp-action="SearchPlaylists" method="post">
+                <input type="hidden" name="serverId" value="@Model.Id" />
+                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск плейлистов">
+            </form>
         </div>
         <div class="main-content">
             <h2>Сервер: @Model.Name</h2>

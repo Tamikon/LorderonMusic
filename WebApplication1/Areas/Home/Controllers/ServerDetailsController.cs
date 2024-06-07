@@ -41,5 +41,24 @@ namespace WebApplication1.Areas.Home.Controllers
 
             return RedirectToAction("ServerDetails", new { serverId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchPlaylists(int serverId, string searchQuery)
+        {
+            var server = await _userRepository.GetServer(serverId);
+            if (server == null)
+            {
+                return NotFound();
+            }
+
+            var playlists = server.Playlists;
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                playlists = playlists.Where(p => p.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            server.Playlists = playlists;
+            return View("ServerDetails", server);
+        }
     }
 }
