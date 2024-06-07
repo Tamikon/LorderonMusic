@@ -50,7 +50,9 @@ namespace WebApplication1
                     var avatar = user.RootElement.GetString("avatar");
                     var servers = await GetUserServersAsync(context.AccessToken, context.Backchannel, context.HttpContext.RequestAborted);
 
-                    var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{userId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
+                    var avatarUrl = !string.IsNullOrEmpty(avatar)
+                        ? $"https://cdn.discordapp.com/avatars/{userId}/{avatar}.png"
+                        : "https://cdn.discordapp.com/embed/avatars/0.png";
 
                     var discordUser = new User
                     {

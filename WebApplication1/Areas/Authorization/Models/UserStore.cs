@@ -17,13 +17,13 @@ namespace WebApplication1.Areas.Authorization.Models
             var existingUser = await _userRepository.GetUser(user.DiscordId);
             if (existingUser == null)
             {
+                user.FirstAuthorizationDate = DateTime.UtcNow;
                 await _userRepository.AddUser(user);
             }
             else
             {
                 existingUser.Username = user.Username;
                 existingUser.AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "https://cdn.discordapp.com/embed/avatars/0.png" : user.AvatarUrl;
-                existingUser.FirstAuthorizationDate = user.FirstAuthorizationDate;
 
                 foreach (var server in user.Servers)
                 {
@@ -54,7 +54,6 @@ namespace WebApplication1.Areas.Authorization.Models
 
                 await _userRepository.UpdateUser(existingUser);
             }
-
         }
     }
 }
