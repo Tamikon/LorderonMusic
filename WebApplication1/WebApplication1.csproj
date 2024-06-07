@@ -24,4 +24,8 @@
     <Resource Include="wwwroot\nonamenosocks - phantom (1).mp4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Home\Views\AddMusic\" />
+  </ItemGroup>
+
 </Project>

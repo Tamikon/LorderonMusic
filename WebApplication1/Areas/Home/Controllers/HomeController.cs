@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WebApplication1.Areas.Home.Models;
 
 namespace WebApplication1.Areas.Home.Controllers
 {
@@ -167,11 +168,6 @@ namespace WebApplication1.Areas.Home.Controllers
             return !string.IsNullOrEmpty(videoId);
         }
 
-        private class YouTubeVideoInfo
-        {
-            public string Title { get; set; }
-            public string Author { get; set; }
-        }
     }
 }
 
