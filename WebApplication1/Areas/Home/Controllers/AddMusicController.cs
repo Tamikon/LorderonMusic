@@ -54,7 +54,7 @@ namespace WebApplication1.Areas.Home.Controllers
             };
 
             await _musicRepository.AddTrack(music);
-            return RedirectToAction("PlaylistDetails", "Home", new { area = "Home", playlistId });
+            return RedirectToAction("PlaylistDetails", "PlaylistDetails", new { area = "Home", playlistId });
         }
         private string GetYouTubeVideoId(string url)
         {

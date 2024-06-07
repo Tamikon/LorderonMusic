@@ -59,7 +59,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
                 await userStore.AddOrUpdateUser(dbUser);
             }
 
-            return RedirectToAction("Index", "Auth", new { area = "Authorization" });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -67,7 +67,7 @@ namespace WebApplication1.Areas.Authorization.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Auth", new { area = "Authorization" });
+            return RedirectToAction("Index");
         }
     }
 }
