@@ -6,5 +6,6 @@ namespace DatabaseService
     {
         Task AddTrack(Music Musics);
         Task<Music> GetTrack(int id);
+        Task DeleteTrack(int id);
     }
 }

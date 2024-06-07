@@ -23,5 +23,15 @@ namespace DatabaseService
         {
             return await _context.Playlists.Include(p => p.Musics).FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task DeletePlaylist(int id)
+        {
+            var playlist = await _context.Playlists.FindAsync(id);
+            if (playlist != null)
+            {
+                _context.Playlists.Remove(playlist);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

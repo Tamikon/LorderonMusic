@@ -6,10 +6,12 @@ namespace WebApplication1.Areas.Home.Controllers
     public class PlaylistDetailsController : Controller
     {
         private readonly IPlaylistRepository _playlistRepository;
+        private readonly IMusicRepository _musicRepository;
 
-        public PlaylistDetailsController(IPlaylistRepository playlistRepository)
+        public PlaylistDetailsController(IPlaylistRepository playlistRepository, IMusicRepository musicRepository)
         {
             _playlistRepository = playlistRepository;
+            _musicRepository = musicRepository;
         }
 
         [HttpGet]
@@ -41,6 +43,12 @@ namespace WebApplication1.Areas.Home.Controllers
 
             playlist.Musics = musicList;
             return View("PlaylistDetails", playlist);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteTrack(int trackId, int playlistId)
+        {
+            await _musicRepository.DeleteTrack(trackId);
+            return RedirectToAction("PlaylistDetails", new { playlistId });
         }
     }
 }
