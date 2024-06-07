@@ -18,7 +18,7 @@
         <div class="search-bar mb-3">
             <form asp-action="SearchMusic" method="post">
                 <input type="hidden" name="playlistId" value="@Model.Id" />
-                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск треков">
+                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
             </form>
         </div>
         <div class="main-content">
@@ -33,6 +33,11 @@
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@GetYouTubeVideoId(music.YouTubeLink)" allowfullscreen></iframe>
                         </div>
+                        <form asp-action="DeleteTrack" method="post" class="mt-2">
+                            <input type="hidden" name="trackId" value="@music.Id" />
+                            <input type="hidden" name="playlistId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
                     </li>
                 }
             </ul>

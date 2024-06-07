@@ -60,5 +60,11 @@ namespace WebApplication1.Areas.Home.Controllers
             server.Playlists = playlists;
             return View("ServerDetails", server);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeletePlaylist(int playlistId, int serverId)
+        {
+            await _playlistRepository.DeletePlaylist(playlistId);
+            return RedirectToAction("ServerDetails", new { serverId });
+        }
     }
 }

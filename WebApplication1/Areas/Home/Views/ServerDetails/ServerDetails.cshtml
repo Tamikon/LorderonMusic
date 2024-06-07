@@ -16,10 +16,7 @@
     </div>
     <div class="container-fluid">
         <div class="search-bar mb-3">
-            <form asp-action="SearchPlaylists" method="post">
-                <input type="hidden" name="serverId" value="@Model.Id" />
-                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск плейлистов">
-            </form>
+            <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
         </div>
         <div class="main-content">
             <h2>Сервер: @Model.Name</h2>
@@ -32,6 +29,11 @@
                             <img src="~/musicIcon.jpg" alt="@playlist.Name" />
                             <span>@playlist.Name</span>
                         </a>
+                        <form asp-action="DeletePlaylist" method="post" class="mt-2">
+                            <input type="hidden" name="playlistId" value="@playlist.Id" />
+                            <input type="hidden" name="serverId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
                     </div>
                 }
             </div>
