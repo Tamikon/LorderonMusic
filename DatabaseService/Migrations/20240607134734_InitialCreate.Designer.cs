@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240527152536_InitialCreate")]
+    [Migration("20240607134734_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -97,8 +97,9 @@ namespace DatabaseService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -109,17 +110,10 @@ namespace DatabaseService.Migrations
 
             modelBuilder.Entity("DatabaseService.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("DiscordId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AvatarUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DiscordId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -130,7 +124,7 @@ namespace DatabaseService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DiscordId");
 
                     b.ToTable("Users");
                 });
