@@ -27,7 +27,9 @@
                     <div class="playlist-item">
                         <a href="@Url.Action("PlaylistDetails", "PlaylistDetails", new { playlistId = playlist.Id })">
                             <img src="~/musicIcon.jpg" alt="@playlist.Name" />
-                            <span>@playlist.Name</span>
+                            <div>
+                                <span>@playlist.Name</span>
+                            </div>
                         </a>
                         <form asp-action="DeletePlaylist" method="post" class="mt-2">
                             <input type="hidden" name="playlistId" value="@playlist.Id" />
@@ -36,8 +38,15 @@
                         </form>
                     </div>
                 }
-            </div>
-            <div class="form-container">
+                <!-- Кнопка для добавления нового плейлиста -->
+                <div class="playlist-item add-playlist" onclick="showAddPlaylistForm()">
+                    <div class="add-icon">
+                        <span>+</span>
+                    </div>
+                    <div class="add-text">Добавить</div>
+                </div>
+            <!-- Форма добавления нового плейлиста -->
+            <div class="form-container" id="addPlaylistForm" style="display: none;">
                 <h4>Добавить новый плейлист</h4>
                 <form asp-action="AddPlaylist" method="post">
                     <input type="hidden" name="serverId" value="@Model.Id" />
@@ -52,6 +61,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/ServerDetails.js"></script>
 </body>
 </html>
 
