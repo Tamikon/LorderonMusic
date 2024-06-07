@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApplication1.Areas.Authorization.Models;
+using DatabaseService.Models;
 
 namespace WebApplication1.Areas.Authorization.Controllers
 {
     [Area("Authorization")]
     public class AuthController : Controller
     {
-        private readonly UserStore userStore;
+        private readonly UserStore _userStore;
 
         public AuthController(UserStore userStore)
         {
-            this.userStore = userStore;
+            _userStore = userStore;
         }
 
         public IActionResult Index()
@@ -46,17 +47,19 @@ namespace WebApplication1.Areas.Authorization.Controllers
 
             if (!string.IsNullOrEmpty(discordId))
             {
-                var avatarUrl = !string.IsNullOrEmpty(avatar) ? $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png" : "https://cdn.discordapp.com/embed/avatars/0.png";
-                var dbUser = new DatabaseService.Models.User
+                var avatarUrl = !string.IsNullOrEmpty(avatar)
+                    ? $"https://cdn.discordapp.com/avatars/{discordId}/{avatar}.png"
+                    : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+                var user = new User
                 {
                     DiscordId = discordId,
                     Username = username,
                     AvatarUrl = avatarUrl,
-                    FirstAuthorizationDate = DateTime.UtcNow,
-                    Servers = new List<DatabaseService.Models.Server>()
+                    Servers = new List<Server>()
                 };
 
-                await userStore.AddOrUpdateUser(dbUser);
+                await _userStore.AddOrUpdateUser(user);
             }
 
             return RedirectToAction("Index");
