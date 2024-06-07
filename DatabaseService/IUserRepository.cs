@@ -16,5 +16,6 @@ namespace DatabaseService
         Task AddMusic(Music music);
         Task<Server> GetServerById(int serverId);
         Task<List<Server>> GetAllServers();
+        Task<List<Server>> GetServersByUserId(string userId);
     }
 }

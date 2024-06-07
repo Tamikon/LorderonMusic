@@ -2,6 +2,7 @@ using DatabaseService;
 using DatabaseService.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -26,7 +27,13 @@ namespace WebApplication1.Areas.Home.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var servers = await _userRepository.GetAllServers();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var servers = await _userRepository.GetServersByUserId(userId);
             return View(servers);
         }
 
@@ -147,6 +154,7 @@ namespace WebApplication1.Areas.Home.Controllers
 
             return View(playlist);
         }
+
         private bool IsValidYouTubeLink(string url)
         {
             var regex = new System.Text.RegularExpressions.Regex(@"^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|music\.youtube\.com\/watch\?v=).+$");
@@ -166,3 +174,4 @@ namespace WebApplication1.Areas.Home.Controllers
         }
     }
 }
+

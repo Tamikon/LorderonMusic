@@ -81,5 +81,12 @@ namespace DatabaseService
                 .Include(s => s.Playlists)
                 .ToListAsync();
         }
+        public async Task<List<Server>> GetServersByUserId(string userId)
+        {
+            return await _context.Servers
+                .Where(s => s.User.DiscordId == userId)
+                .Include(s => s.Playlists)
+                .ToListAsync();
+        }
     }
 }
