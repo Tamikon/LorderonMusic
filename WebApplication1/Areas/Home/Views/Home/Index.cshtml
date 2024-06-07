@@ -16,7 +16,9 @@
     </div>
     <div class="main-content">
         <div class="search-bar mb-3">
-            <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+            <form asp-action="SearchServers" method="post">
+                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск серверов">
+            </form>
         </div>
         <div class="servers-list">
             <h3>Сервера</h3>
