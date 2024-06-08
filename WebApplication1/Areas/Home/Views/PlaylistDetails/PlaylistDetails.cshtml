@@ -15,52 +15,29 @@
         @await Html.PartialAsync("LeftMenu")
     </div>
     <div class="container-fluid">
-        <div class="search-bar mb-3">
-            <form asp-action="SearchMusic" method="post">
+        <div class="search-bar mb-3 d-flex align-items-center">
+            <form asp-action="SearchMusic" method="post" class="flex-grow-1 mr-2">
                 <input type="hidden" name="playlistId" value="@Model.Id" />
                 <input type="text" name="searchQuery" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
             </form>
+            <button class="btn btn-primary" onclick="showAddMusicForm()">Добавить музыку</button>
         </div>
         <div class="main-content">
             <h2>Плейлист: @Model.Name</h2>
             <h3>Треки</h3>
-            <ul class="list-group">
+            <div class="track-grid">
                 @foreach (var music in Model.Musics)
                 {
-                    <li class="list-group-item">
-                        <h5>@music.Title</h5>
-                        <p class="text-muted">@music.Artist</p>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@GetYouTubeVideoId(music.YouTubeLink)" allowfullscreen></iframe>
-                        </div>
-                        <form asp-action="DeleteTrack" method="post" class="mt-2">
-                            <input type="hidden" name="trackId" value="@music.Id" />
-                            <input type="hidden" name="playlistId" value="@Model.Id" />
-                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
-                        </form>
-                    </li>
+                    @await Html.PartialAsync("TrackItem", music)
                 }
-            </ul>
-
-            <div class="mt-4">
-                <a href="@Url.Action("AddMusicForm", "AddMusic", new { area = "Home", playlistId = Model.Id })" class="btn btn-primary">Добавить музыку</a>
             </div>
+        </div>
+        <div class="form-overlay" id="formOverlay" style="display: none;">
+            @await Html.PartialAsync("AddMusicForm", Model)
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/PlaylistDetails.js"></script>
 </body>
 </html>
-
-@functions {
-    private string GetYouTubeVideoId(string url)
-    {
-        var uri = new Uri(url);
-        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-        return query["v"];
-    }
-}
-
-@{
-    Layout = "";
-}
