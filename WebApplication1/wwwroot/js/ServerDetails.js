@@ -1,3 +1,7 @@
 function showAddPlaylistForm() {
-    document.getElementById('addPlaylistForm').style.display = 'block';
+    document.getElementById('formOverlay').style.display = 'flex';
+}
+
+function hideAddPlaylistForm() {
+    document.getElementById('formOverlay').style.display = 'none';
 }

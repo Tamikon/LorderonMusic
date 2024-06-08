@@ -1,6 +1,4 @@
-﻿@model DatabaseService.Models.Server
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -45,17 +43,21 @@
                     </div>
                     <div class="add-text">Добавить</div>
                 </div>
+            </div>
             <!-- Форма добавления нового плейлиста -->
-            <div class="form-container" id="addPlaylistForm" style="display: none;">
-                <h4>Добавить новый плейлист</h4>
-                <form asp-action="AddPlaylist" method="post">
-                    <input type="hidden" name="serverId" value="@Model.Id" />
-                    <div class="form-group">
-                        <label for="playlistName">Название плейлиста</label>
-                        <input type="text" name="playlistName" class="form-control" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Добавить плейлист</button>
-                </form>
+            <div class="form-overlay" id="formOverlay" style="display: none;">
+                <div class="form-container" id="addPlaylistForm">
+                    <h4>Добавить новый плейлист</h4>
+                    <form asp-action="AddPlaylist" method="post">
+                        <input type="hidden" name="serverId" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="playlistName">Название плейлиста</label>
+                            <input type="text" name="playlistName" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить плейлист</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddPlaylistForm()">Назад</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
