@@ -60,10 +60,26 @@ namespace WebApplication1.Areas.Home.Controllers
             server.Playlists = playlists;
             return View("ServerDetails", server);
         }
+
         [HttpPost]
         public async Task<IActionResult> DeletePlaylist(int playlistId, int serverId)
         {
             await _playlistRepository.DeletePlaylist(playlistId);
+            return RedirectToAction("ServerDetails", new { serverId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPlaylist(int playlistId, int serverId, string playlistName)
+        {
+            var playlist = await _playlistRepository.GetPlaylist(playlistId);
+            if (playlist == null)
+            {
+                return NotFound();
+            }
+
+            playlist.Name = playlistName;
+            await _playlistRepository.UpdatePlaylist(playlist);
+
             return RedirectToAction("ServerDetails", new { serverId });
         }
     }
