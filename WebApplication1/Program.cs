@@ -55,6 +55,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Authorization}/{controller=Auth}/{action=Index}/{id?}");
-//pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
+    //pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

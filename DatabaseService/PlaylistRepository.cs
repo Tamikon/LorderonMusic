@@ -1,6 +1,9 @@
 ﻿using DatabaseService.Data;
 using DatabaseService.Models;
+
 using Microsoft.EntityFrameworkCore;
+
+using System.Threading.Tasks;
 
 namespace DatabaseService
 {
@@ -33,5 +36,13 @@ namespace DatabaseService
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdatePlaylist(Playlist playlist)
+        {
+            _context.Playlists.Update(playlist);
+            await _context.SaveChangesAsync();
+        }
+
+
     }
 }

@@ -8,7 +8,6 @@
     <title>Треки плейлиста @Model.Name</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/PlaylistDetails.css" rel="stylesheet" />
-    <link href="~/css/LeftMenu.css" rel="stylesheet" />
 </head>
 <body class="dark-theme">
     <div class="sidebar">
@@ -20,17 +19,19 @@
                 <input type="hidden" name="playlistId" value="@Model.Id" />
                 <input type="text" name="searchQuery" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
             </form>
-            <button class="btn btn-primary" onclick="showAddMusicForm()">Добавить музыку</button>
         </div>
-        <div class="main-content">
-            <h2>Плейлист: @Model.Name</h2>
-            <h3>Треки</h3>
-            <div class="track-grid">
-                @foreach (var music in Model.Musics)
-                {
-                    @await Html.PartialAsync("TrackItem", music)
-                }
+        <h2>@Model.Name</h2>
+        <div class="track-grid">
+            <div class="track-item add-music" onclick="showAddMusicForm()">
+                <div class="add-icon">
+                    <span>+</span>
+                </div>
+                <div class="add-text">Добавить</div>
             </div>
+            @foreach (var music in Model.Musics)
+            {
+                @await Html.PartialAsync("TrackItem", music)
+            }
         </div>
         <div class="form-overlay" id="formOverlay" style="display: none;">
             @await Html.PartialAsync("AddMusicForm", Model)

@@ -1,0 +1,16 @@
+﻿@model DatabaseService.Models.Playlist
+
+<link rel="stylesheet" href="~/css/AddForm.css" />
+<div class="form-container">
+    <h4>Редактировать плейлист</h4>
+    <form asp-action="EditPlaylist" method="post">
+        <input type="hidden" name="playlistId" value="@Model.Id" />
+        <input type="hidden" name="serverId" value="@ViewBag.ServerId" />
+        <div class="form-group">
+            <label for="playlistName">Название плейлиста</label>
+            <input type="text" name="playlistName" class="form-control" value="@Model.Name" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <button type="button" class="btn btn-secondary" onclick="hideEditPlaylistForm()">Отмена</button>
+    </form>
+</div>

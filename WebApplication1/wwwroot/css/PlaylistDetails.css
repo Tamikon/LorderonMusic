@@ -1,133 +1,72 @@
-﻿/* PlaylistDetails.css */
-body.dark-theme {
+﻿body.dark-theme {
     background-color: #121212;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    color: #DCDDDE;
 }
-
-.sidebar {
-    background-color: #1f1f1f;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 220px;
-    overflow-y: auto;
-    padding-top: 20px;
-}
-
-    .sidebar h4 {
-        color: #ffffff;
-        padding-left: 20px;
-    }
-
-    .sidebar .nav-link {
-        color: #e0e0e0;
-        padding-left: 20px;
-    }
-
-        .sidebar .nav-link:hover {
-            background-color: #333333;
-        }
-
-    .sidebar .logout-button {
-        margin: 20px 20px 20px 20px;
-    }
 
 .container-fluid {
-    padding-top: 20px;
-    padding-left: 240px; /* Add padding to avoid overlapping with the sidebar */
+    padding-left: 240px;
 }
 
 .main-content {
-    background-color: #1f1f1f;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
 }
 
-h2, h3, h5 {
-    color: #ffffff;
+.server-name {
+    margin-left: 10px;
 }
 
-.list-group-item {
+.playlist-grid, .track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.playlist-item, .track-item {
     background-color: #2a2a2a;
     border: 1px solid #333333;
-    color: #e0e0e0;
-}
-
-    .list-group-item h5 {
-        margin: 0;
-        color: #ffffff;
-    }
-
-    .list-group-item p {
-        margin: 0;
-        color: #b0b0b0;
-    }
-
-    .list-group-item .embed-responsive {
-        margin-top: 10px;
-    }
-
-.btn-primary {
-    background-color: #76c7c0;
-    border-color: #76c7c0;
-}
-
-    .btn-primary:hover {
-        background-color: #5fb2a6;
-        border-color: #5fb2a6;
-    }
-
-.track-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-.track-item {
-    background: #2c2c2c;
-    padding: 1rem;
     border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 
-.track-info {
-    text-align: center;
-    margin-top: 0.5rem;
-}
-
-    .track-info h5 {
-        margin: 0;
-        font-size: 1rem;
+    .playlist-item:hover, .track-item:hover {
+        transform: translateY(-5px);
     }
 
-.track-video {
+    .playlist-item img, .track-item img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .playlist-item a, .track-item a {
+        color: #7289DA;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+.form-container {
     width: 100%;
+    max-width: 500px;
+    background-color: #40444B;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-}
-
-    .track-video iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-.track-actions {
-    text-align: center;
-    margin-top: 0.5rem;
 }
 
 .form-overlay {
@@ -136,14 +75,71 @@ h2, h3, h5 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
-.form-container {
-    background: #fff;
-    padding: 2rem;
+.form-control {
+    background-color: #333333;
+    color: #DCDDDE;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+    .form-control:focus {
+        background-color: #333333;
+        color: #DCDDDE;
+        border-color: #7289DA;
+        box-shadow: none;
+    }
+
+.btn-primary {
+    background-color: #7289DA;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #5b6eae;
+    }
+
+.add-music {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height: 250px;
+    background-color: #2a2a2a;
+    border: 1px solid #333333;
     border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.add-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+    .add-icon span {
+        font-size: 2rem;
+        color: #7289DA;
+    }
+
+.add-text {
+    color: #7289DA;
+    font-size: 1rem;
 }
