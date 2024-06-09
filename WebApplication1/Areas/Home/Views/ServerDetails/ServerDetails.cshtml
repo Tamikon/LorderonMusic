@@ -6,7 +6,6 @@
     <title>Плейлисты сервера @Model.Name</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/ServerDetails.css" rel="stylesheet" />
-    <link href="~/css/LeftMenu.css" rel="stylesheet" />
 </head>
 <body class="dark-theme">
     <div class="sidebar">
@@ -17,9 +16,14 @@
             <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
         </div>
         <div class="main-content">
-            <h2>Сервер: @Model.Name</h2>
-            <h3>Плейлисты</h3>
+            <h2>@Model.Name</h2>
             <div class="playlist-grid">
+                <div class="playlist-item add-playlist" onclick="showAddPlaylistForm()">
+                    <div class="add-icon">
+                        <span>+</span>
+                    </div>
+                    <div class="add-text">Добавить</div>
+                </div>
                 @foreach (var playlist in Model.Playlists)
                 {
                     <div class="playlist-item">
@@ -36,26 +40,9 @@
                         </form>
                     </div>
                 }
-                <div class="playlist-item add-playlist" onclick="showAddPlaylistForm()">
-                    <div class="add-icon">
-                        <span>+</span>
-                    </div>
-                    <div class="add-text">Добавить</div>
-                </div>
             </div>
             <div class="form-overlay" id="formOverlay" style="display: none;">
-                <div class="form-container" id="addPlaylistForm">
-                    <h4>Добавить новый плейлист</h4>
-                    <form asp-action="AddPlaylist" method="post">
-                        <input type="hidden" name="serverId" value="@Model.Id" />
-                        <div class="form-group">
-                            <label for="playlistName">Название плейлиста</label>
-                            <input type="text" name="playlistName" class="form-control" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Добавить плейлист</button>
-                        <button type="button" class="btn btn-secondary" onclick="hideAddPlaylistForm()">Назад</button>
-                    </form>
-                </div>
+                @await Html.PartialAsync("AddPlaylistForm")
             </div>
         </div>
     </div>

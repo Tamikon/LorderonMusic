@@ -1,17 +1,16 @@
-﻿/* Контейнер с основным содержимым */
+﻿
 body.dark-theme {
     background-color: #121212;
     color: #DCDDDE;
 }
 
 .container-fluid {
-    padding-left: 240px; /* Отступ, чтобы учесть ширину бокового меню */
+    padding-left: 240px;
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 20px;
 }
 
@@ -38,22 +37,22 @@ body.dark-theme {
     cursor: pointer;
 }
 
-.playlist-item:hover {
-    transform: translateY(-5px);
-}
+    .playlist-item:hover {
+        transform: translateY(-5px);
+    }
 
-.playlist-item img {
-    width: 100px; /* Ограничение ширины */
-    height: 100px; /* Ограничение высоты */
-    object-fit: cover;
-    margin-bottom: 10px;
-}
+    .playlist-item img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
 
-.playlist-item a {
-    color: #7289DA;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
+    .playlist-item a {
+        color: #7289DA;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
 
 .form-container {
     width: 100%;
@@ -62,7 +61,7 @@ body.dark-theme {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1001; /* Ensure it appears above the overlay */
+    z-index: 1001;
     position: relative;
 }
 
@@ -76,7 +75,7 @@ body.dark-theme {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it appears above other content */
+    z-index: 1000;
 }
 
 .form-control {
@@ -88,23 +87,23 @@ body.dark-theme {
     margin-top: 20px;
 }
 
-.form-control:focus {
-    background-color: #333333;
-    color: #DCDDDE;
-    border-color: #7289DA;
-    box-shadow: none;
-}
+    .form-control:focus {
+        background-color: #333333;
+        color: #DCDDDE;
+        border-color: #7289DA;
+        box-shadow: none;
+    }
 
 .btn-primary {
     background-color: #7289DA;
     border: none;
 }
 
-.btn-primary:hover {
-    background-color: #5b6eae;
-}
+    .btn-primary:hover {
+        background-color: #5b6eae;
+    }
 
-/* Стили для кнопки добавления плейлиста */
+
 .add-playlist {
     background-color: #2a2a2a;
     border: 1px solid #333333;
@@ -118,34 +117,33 @@ body.dark-theme {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    position: relative; /* Добавляем позиционирование */
+    position: relative;
 }
 
-.add-playlist img {
-    width: 100px; /* Ограничение ширины */
-    height: 100px; /* Ограничение высоты */
-    object-fit: cover;
-    margin-bottom: 10px;
-}
+    .add-playlist img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
 
 .add-text {
-    color: #7289DA; /* Цвет текста "Добавить" */
-    font-size: 1rem; /* Размер шрифта */
+    color: #7289DA;
+    font-size: 1rem;
 }
 
 .add-icon {
-    width: 100%; /* Занимает всю ширину кнопки */
-    height: 100%; /* Занимает всю высоту кнопки */
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative; /* Добавляем позиционирование */
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-.add-icon span {
-    position: absolute; /* Для центрирования плюса */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem; /* Размер плюса */
-}
+    .add-icon span {
+        font-size: 2rem;
+        color: #7289DA;
+    }

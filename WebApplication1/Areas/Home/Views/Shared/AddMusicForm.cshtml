@@ -1,4 +1,5 @@
-﻿<div class="form-container" id="addMusicForm">
+﻿<link rel="stylesheet" href="~/css/AddForm.css" />
+<div class="form-container" id="addMusicForm">
     <h4>Добавить новую музыку</h4>
     <form asp-action="AddMusic" method="post">
         <input type="hidden" name="playlistId" value="@Model.Id" />

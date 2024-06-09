@@ -1,0 +1,50 @@
+﻿/* AddMusicForm.css */
+body.dark-theme .form-container {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    body.dark-theme .form-container h4 {
+        color: #ffffff;
+    }
+
+    body.dark-theme .form-container .form-group label {
+        color: #e0e0e0;
+    }
+
+    body.dark-theme .form-container .form-group input {
+        background-color: #2a2a2a;
+        border: 1px solid #333333;
+        color: #e0e0e0;
+    }
+
+        body.dark-theme .form-container .form-group input::placeholder {
+            color: #b0b0b0;
+        }
+
+    body.dark-theme .form-container .btn-primary {
+        background-color: #76c7c0;
+        border-color: #76c7c0;
+        color: #ffffff;
+    }
+
+        body.dark-theme .form-container .btn-primary:hover {
+            background-color: #5fb2a6;
+            border-color: #5fb2a6;
+            color: #ffffff;
+        }
+
+    body.dark-theme .form-container .btn-secondary {
+        background-color: #444444;
+        border-color: #444444;
+        color: #e0e0e0;
+    }
+
+        body.dark-theme .form-container .btn-secondary:hover {
+            background-color: #333333;
+            border-color: #333333;
+            color: #e0e0e0;
+        }
