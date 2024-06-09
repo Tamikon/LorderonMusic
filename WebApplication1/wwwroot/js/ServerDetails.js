@@ -1,26 +1,17 @@
-//function showEditPlaylistForm(playlistId) {
-//    document.getElementById('editPlaylistForm-' + playlistId).style.display = 'block';
-//}
+function showAddPlaylistForm() {
+    document.getElementById('formOverlay').style.display = 'flex';
+}
 
-//function hideEditPlaylistForm(playlistId) {
-//    document.getElementById('editPlaylistForm-' + playlistId).style.display = 'none';
-//}
-
+function hideAddPlaylistForm() {
+    document.getElementById('formOverlay').style.display = 'none';
+}
 
 function showEditPlaylistForm(playlistId) {
     $.get('/Home/ServerDetails/GetEditPlaylistForm', { playlistId: playlistId }, function (data) {
-        $('#editFormOverlay').html(data).show();
+        $('#editFormOverlay').html(data).css('display', 'flex');
     });
 }
 
 function hideEditPlaylistForm() {
     document.getElementById('editFormOverlay').style.display = 'none';
-}
-
-function showAddPlaylistForm() {
-    document.getElementById('formOverlay').style.display = 'block';
-}
-
-function hideAddPlaylistForm() {
-    document.getElementById('formOverlay').style.display = 'none';
 }

@@ -28,7 +28,6 @@
                     </div>
                     <div class="add-text">Добавить</div>
                 </div>
-                <!-- ServerDetails.cshtml -->
                 @foreach(var playlist in Model.Playlists)
                 {
                     <div class="playlist-item">
@@ -54,31 +53,11 @@
                 @await Html.PartialAsync("AddPlaylistForm")
             </div>
             <div class="form-overlay" id="editFormOverlay" style="display: none;">
-                <!-- Контент будет подгружен через AJAX -->
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="~/js/ServerDetails.js"></script>
-    <script>
-        function showAddPlaylistForm() {
-            document.getElementById('formOverlay').style.display = 'flex';
-        }
-
-        function hideAddPlaylistForm() {
-            document.getElementById('formOverlay').style.display = 'none';
-        }
-
-        function showEditPlaylistForm(playlistId) {
-            $.get('/Home/ServerDetails/GetEditPlaylistForm', { playlistId: playlistId }, function (data) {
-                $('#editFormOverlay').html(data).css('display', 'flex');
-            });
-        }
-
-        function hideEditPlaylistForm() {
-            document.getElementById('editFormOverlay').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
