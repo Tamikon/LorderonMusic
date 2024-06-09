@@ -17,7 +17,7 @@
         <div class="search-bar mb-3 d-flex align-items-center">
             <form asp-action="SearchMusic" method="post" class="flex-grow-1 mr-2">
                 <input type="hidden" name="playlistId" value="@Model.Id" />
-                <input type="text" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
+                <input type="text" name="searchQuery" class="form-control" placeholder="Поиск треков, альбомов, исполнителей, подкастов">
             </form>
         </div>
         <h2>@Model.Name</h2>
