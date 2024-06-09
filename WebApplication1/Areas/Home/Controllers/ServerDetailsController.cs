@@ -82,5 +82,31 @@ namespace WebApplication1.Areas.Home.Controllers
 
             return RedirectToAction("ServerDetails", new { serverId });
         }
+
+        public async Task<IActionResult> GetPlaylist(int playlistId)
+        {
+            var playlist = await _playlistRepository.GetPlaylist(playlistId);
+            if (playlist == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.ServerId = playlist.ServerId;
+            return PartialView("_EditPlaylistForm", playlist);
+        }
+
+        public async Task<IActionResult> GetEditPlaylistForm(int playlistId)
+        {
+            var playlist = await _playlistRepository.GetPlaylist(playlistId);
+            if (playlist == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.ServerId = playlist.ServerId;
+            return PartialView("_EditPlaylistForm", playlist);
+        }
+
+
     }
 }
