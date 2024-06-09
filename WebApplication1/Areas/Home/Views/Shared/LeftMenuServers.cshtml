@@ -22,16 +22,12 @@
                         <a class="nav-link text-white" asp-controller="AboutProject" asp-action="Index">Справка</a>
                     </li>
                 </ul>
-                <button id="backButton" class="btn btn-secondary mt-2 mr-2">Назад</button>
+                <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Назад</a>
+                @* <button type="button" class="btn btn-secondary" asp-area="Home" asp-controller="Home" asp-action="Index">Назад</button> *@
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="~/js/LeftMenu.js"></script>
 </body>
 </html>
-
-@{
-    Layout = "";
-}

@@ -12,7 +12,7 @@
 </head>
 <body class="dark-theme">
     <div class="sidebar">
-        @await Html.PartialAsync("LeftMenu")
+        @await Html.PartialAsync("LeftMenuPlayLists", new { ServerId = @Model.ServerId })
     </div>
     <div class="container-fluid">
         <div class="search-bar mb-3 d-flex align-items-center">

@@ -10,7 +10,7 @@
 </head>
 <body class="dark-theme">
     <div class="sidebar">
-        @await Html.PartialAsync("LeftMenu")
+        @await Html.PartialAsync("LeftMenuServers")
     </div>
     <div class="container-fluid">
         <div class="search-bar mb-3">
@@ -36,7 +36,6 @@
                         </form>
                     </div>
                 }
-                <!-- Кнопка для добавления нового плейлиста -->
                 <div class="playlist-item add-playlist" onclick="showAddPlaylistForm()">
                     <div class="add-icon">
                         <span>+</span>
@@ -44,7 +43,6 @@
                     <div class="add-text">Добавить</div>
                 </div>
             </div>
-            <!-- Форма добавления нового плейлиста -->
             <div class="form-overlay" id="formOverlay" style="display: none;">
                 <div class="form-container" id="addPlaylistForm">
                     <h4>Добавить новый плейлист</h4>
@@ -66,7 +64,3 @@
     <script src="~/js/ServerDetails.js"></script>
 </body>
 </html>
-
-@{
-    Layout = "";
-}
