@@ -28,6 +28,7 @@
                     </div>
                     <div class="add-text">Добавить</div>
                 </div>
+                <!-- ServerDetails.cshtml -->
                 @foreach(var playlist in Model.Playlists)
                 {
                     <div class="playlist-item">
@@ -39,7 +40,7 @@
                         </a>
                         <div class="playlist-actions mt-2">
                             <button class="btn btn-primary btn-sm" onclick="showEditPlaylistForm(@playlist.Id)">Редактировать</button>
-                            <form asp-action="DeletePlaylist" method="post" class="d-inline">
+                            <form asp-action="DeletePlaylist" method="post" class="d-inline" onsubmit="return confirm('Вы уверены, что хотите удалить этот плейлист?');">
                                 <input type="hidden" name="playlistId" value="@playlist.Id" />
                                 <input type="hidden" name="serverId" value="@Model.Id" />
                                 <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
@@ -47,6 +48,7 @@
                         </div>
                     </div>
                 }
+
             </div>
             <div class="form-overlay" id="formOverlay" style="display: none;">
                 @await Html.PartialAsync("AddPlaylistForm")
