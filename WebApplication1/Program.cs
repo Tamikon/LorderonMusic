@@ -19,6 +19,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 builder.Services.AddScoped<IMusicRepository, MusicRepository>();
 builder.Services.AddHttpClient();
+builder.Services.AddSingleton(provider =>
+    new YouTubeService(
+        provider.GetRequiredService<IHttpClientFactory>(),
+        "AIzaSyA2TxFlqiE5wW2zfQkjC-_LmKkXfDHPxMk"));
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -51,5 +55,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Authorization}/{controller=Auth}/{action=Index}/{id?}");
+//pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

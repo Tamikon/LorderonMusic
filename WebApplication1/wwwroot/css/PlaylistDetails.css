@@ -83,3 +83,67 @@ h2, h3, h5 {
         background-color: #5fb2a6;
         border-color: #5fb2a6;
     }
+
+.track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.track-item {
+    background: #2c2c2c;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.track-info {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+    .track-info h5 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+.track-video {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+    .track-video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+.track-actions {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}

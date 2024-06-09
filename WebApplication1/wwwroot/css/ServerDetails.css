@@ -1,19 +1,20 @@
-﻿body.dark-theme {
-    background-color: #202225;
+﻿/* Контейнер с основным содержимым */
+body.dark-theme {
+    background-color: #121212;
     color: #DCDDDE;
 }
-/* Контейнер с основным содержимым */
+
 .container-fluid {
     padding-left: 240px; /* Отступ, чтобы учесть ширину бокового меню */
 }
-/* Основное содержимое */
+
 .main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
-/* Сетка плейлистов */
+
 .playlist-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -21,35 +22,39 @@
     width: 100%;
     max-width: 1200px;
 }
-/* Элементы плейлистов */
+
 .playlist-item {
-    background-color: #2F3136;
+    background-color: #2a2a2a;
+    border: 1px solid #333333;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
 
-    .playlist-item:hover {
-        transform: translateY(-5px);
-    }
+.playlist-item:hover {
+    transform: translateY(-5px);
+}
 
-    .playlist-item img {
-        width: 100px; /* Ограничение ширины */
-        height: 100px; /* Ограничение высоты */
-        object-fit: cover;
-        margin-bottom: 10px;
-    }
+.playlist-item img {
+    width: 100px; /* Ограничение ширины */
+    height: 100px; /* Ограничение высоты */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
 
-    .playlist-item a {
-        color: #7289DA;
-        text-decoration: none;
-        display: block;
-        font-size: 0.9rem;
-    }
-/* Контейнер для формы */
+.playlist-item a {
+    color: #7289DA;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
 .form-container {
     width: 100%;
     max-width: 500px;
@@ -57,29 +62,90 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
+    z-index: 1001; /* Ensure it appears above the overlay */
+    position: relative;
 }
-/* Стили для поля ввода и кнопок */
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
 .form-control {
-    background-color: #2F3136;
+    background-color: #333333;
     color: #DCDDDE;
     border: none;
     padding: 1rem;
     font-size: 1rem;
+    margin-top: 20px;
 }
 
-    .form-control:focus {
-        background-color: #2F3136;
-        color: #DCDDDE;
-        border-color: #7289DA;
-        box-shadow: none;
-    }
+.form-control:focus {
+    background-color: #333333;
+    color: #DCDDDE;
+    border-color: #7289DA;
+    box-shadow: none;
+}
 
 .btn-primary {
     background-color: #7289DA;
     border: none;
 }
 
-    .btn-primary:hover {
-        background-color: #5b6eae;
-    }
+.btn-primary:hover {
+    background-color: #5b6eae;
+}
+
+/* Стили для кнопки добавления плейлиста */
+.add-playlist {
+    background-color: #2a2a2a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative; /* Добавляем позиционирование */
+}
+
+.add-playlist img {
+    width: 100px; /* Ограничение ширины */
+    height: 100px; /* Ограничение высоты */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.add-text {
+    color: #7289DA; /* Цвет текста "Добавить" */
+    font-size: 1rem; /* Размер шрифта */
+}
+
+.add-icon {
+    width: 100%; /* Занимает всю ширину кнопки */
+    height: 100%; /* Занимает всю высоту кнопки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Добавляем позиционирование */
+}
+
+.add-icon span {
+    position: absolute; /* Для центрирования плюса */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem; /* Размер плюса */
+}

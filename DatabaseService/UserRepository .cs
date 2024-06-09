@@ -27,6 +27,7 @@ namespace DatabaseService
             return await _context.Users
                 .Include(u => u.Servers)
                 .ThenInclude(s => s.Playlists)
+                .ThenInclude(p => p.Musics)
                 .FirstOrDefaultAsync(u => u.DiscordId == discordId);
         }
 

@@ -1,0 +1,26 @@
+﻿@model DatabaseService.Models.Music
+
+<div class="track-item">
+    <div class="track-video embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@GetYouTubeVideoId(Model.YouTubeLink)" allowfullscreen></iframe>
+    </div>
+    <div class="track-info">
+        <h5>@Model.Title</h5>
+        <p class="text-muted">@Model.Artist</p>
+    </div>
+    <div class="track-actions">
+        <form asp-action="DeleteTrack" method="post" class="mt-2">
+            <input type="hidden" name="trackId" value="@Model.Id" />
+            <input type="hidden" name="playlistId" value="@Model.PlaylistId" />
+            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+        </form>
+    </div>
+</div>
+@functions {
+    private string GetYouTubeVideoId(string url)
+    {
+        var uri = new Uri(url);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        return query["v"];
+    }
+}

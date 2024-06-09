@@ -1,14 +1,13 @@
-﻿/* LeftMenu.css */
-.sidebar {
-    background-color: #1f1f1f;
-    height: 100vh; /* Полная высота окна */
-    position: fixed; /* Фиксированное положение */
+﻿.sidebar {
+    background-color: #2F3136; /* Match the color of server cells */
+    height: 100vh; /* Full height of the window */
+    position: fixed; /* Fixed position */
     top: 0;
     left: 0;
-    width: 220px; /* Ширина бокового меню */
+    width: 220px; /* Width of the sidebar */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Разделение пространства */
+    justify-content: space-between; /* Space between items */
     padding-top: 20px;
     padding-bottom: 20px;
     overflow-y: auto;

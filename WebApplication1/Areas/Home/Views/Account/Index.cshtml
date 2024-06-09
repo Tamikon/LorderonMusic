@@ -9,32 +9,38 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/Account.css" rel="stylesheet" />
     <link href="~/css/LeftMenu.css" rel="stylesheet" />
+    <link href="~/css/ServerDetails.css" rel="stylesheet" />
 </head>
 <body class="dark-theme">
     <div class="sidebar">
-        @await Html.PartialAsync("LeftMenu")
+        @await Html.PartialAsync("LeftMenuWithBack")
     </div>
     <div class="container mt-5">
         <h1>Мой аккаунт</h1>
-        <div class="card">
+        <div class="card profile-card">
             <div class="card-body">
                 <h5 class="card-title">@Model.Username</h5>
                 <img src="@Model.AvatarUrl" alt="Avatar" class="img-thumbnail" width="100">
                 <p class="card-text">Дата первой авторизации: @Model.FirstAuthorizationDate.ToString("g")</p>
             </div>
         </div>
-        <h2 class="mt-4">Сервера</h2>
-        <div class="row">
-            @foreach (var server in Model.Servers)
+        <h2 class="mt-4">Плейлисты</h2>
+        <div class="playlist-grid">
+            @foreach(var server in Model.Servers)
             {
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="@server.AvatarUrl" class="card-img-top img-thumbnail" alt="Server Avatar">
-                        <div class="card-body">
-                            <h5 class="card-title">@server.Name</h5>
-                        </div>
+                foreach(var playlist in server.Playlists)
+                {
+                    <div class="playlist-item">
+                        <a href="@Url.Action("PlaylistDetails", "PlaylistDetails", new { playlistId = playlist.Id })">
+                            <img src="~/musicIcon.jpg" alt="@playlist.Name" />
+                            <div class="card-body">
+                                <h5 class="card-title">@playlist.Name</h5>
+                                <h6 class="card-text">Музыки в плейлисте: @playlist.Musics?.Count()</h6>
+                                <h6 class="card-text">Сервер: @server.Name</h6>
+                            </div>
+                        </a>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
@@ -42,7 +48,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-@{
-    Layout = "";
-}

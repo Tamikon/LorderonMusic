@@ -1,0 +1,36 @@
+﻿@{
+    Layout = ""; // If you have a layout page, specify it here
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справка</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/ServerDetails.css" rel="stylesheet" />
+    <link href="~/css/LeftMenu.css" rel="stylesheet" />
+</head>
+<body class="dark-theme">
+    <div class="sidebar">
+        @await Html.PartialAsync("LeftMenuWithBack")
+    </div>
+    <div class="container-fluid">
+        <div class="main-content">
+            <h2>Справка</h2>
+            <p>Добро пожаловать на страницу справки нашего проекта. Здесь вы найдете информацию о проекте и его разработчиках.</p>
+            <h3>О проекте</h3>
+            <p>Этот проект был разработан для прослушивания музыки на различных серверах. Он позволяет добавлять, удалять и прослушивать плейлисты с музыкой.</p>
+            <h3>Разработчики</h3>
+            <p>Проект разработали:</p>
+            <ul>
+                <li>Бестаев Саба</li>
+                <li>Камболов Тамерлан</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

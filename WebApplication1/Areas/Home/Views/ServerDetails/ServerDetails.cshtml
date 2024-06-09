@@ -1,6 +1,4 @@
-﻿@model DatabaseService.Models.Server
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +10,7 @@
 </head>
 <body class="dark-theme">
     <div class="sidebar">
-        @await Html.PartialAsync("LeftMenu")
+        @await Html.PartialAsync("LeftMenuServers")
     </div>
     <div class="container-fluid">
         <div class="search-bar mb-3">
@@ -27,7 +25,9 @@
                     <div class="playlist-item">
                         <a href="@Url.Action("PlaylistDetails", "PlaylistDetails", new { playlistId = playlist.Id })">
                             <img src="~/musicIcon.jpg" alt="@playlist.Name" />
-                            <span>@playlist.Name</span>
+                            <div>
+                                <span>@playlist.Name</span>
+                            </div>
                         </a>
                         <form asp-action="DeletePlaylist" method="post" class="mt-2">
                             <input type="hidden" name="playlistId" value="@playlist.Id" />
@@ -36,25 +36,31 @@
                         </form>
                     </div>
                 }
-            </div>
-            <div class="form-container">
-                <h4>Добавить новый плейлист</h4>
-                <form asp-action="AddPlaylist" method="post">
-                    <input type="hidden" name="serverId" value="@Model.Id" />
-                    <div class="form-group">
-                        <label for="playlistName">Название плейлиста</label>
-                        <input type="text" name="playlistName" class="form-control" required />
+                <div class="playlist-item add-playlist" onclick="showAddPlaylistForm()">
+                    <div class="add-icon">
+                        <span>+</span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Добавить плейлист</button>
-                </form>
+                    <div class="add-text">Добавить</div>
+                </div>
+            </div>
+            <div class="form-overlay" id="formOverlay" style="display: none;">
+                <div class="form-container" id="addPlaylistForm">
+                    <h4>Добавить новый плейлист</h4>
+                    <form asp-action="AddPlaylist" method="post">
+                        <input type="hidden" name="serverId" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="playlistName">Название плейлиста</label>
+                            <input type="text" name="playlistName" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить плейлист</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddPlaylistForm()">Назад</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/ServerDetails.js"></script>
 </body>
 </html>
-
-@{
-    Layout = "";
-}
