@@ -29,7 +29,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = "Discord";
 }).AddCookie()
-.AddOAuth("Discord", options => DiscordAuthenticationHandler.ConfigureOAuth(options, builder.Services.BuildServiceProvider()));
+.AddOAuth("Discord", options => DiscordAuthenticationHandler.ConfigureOAuth(options,
+builder.Services.BuildServiceProvider()));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserStore>();

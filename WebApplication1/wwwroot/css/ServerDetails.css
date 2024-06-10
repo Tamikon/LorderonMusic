@@ -1,11 +1,11 @@
-﻿
-body.dark-theme {
+﻿body.dark-theme {
     background-color: #121212;
     color: #DCDDDE;
 }
 
 .container-fluid {
     padding-left: 240px;
+    padding-right: 15px; /* Добавим отступ справа */
 }
 
 .main-content {
@@ -19,7 +19,6 @@ body.dark-theme {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
     width: 100%;
-    max-width: 1200px;
 }
 
 .playlist-item {
@@ -97,12 +96,12 @@ body.dark-theme {
 .btn-primary {
     background-color: #7289DA;
     border: none;
+    margin-bottom: 10px;
 }
 
     .btn-primary:hover {
         background-color: #5b6eae;
     }
-
 
 .add-playlist {
     background-color: #2a2a2a;

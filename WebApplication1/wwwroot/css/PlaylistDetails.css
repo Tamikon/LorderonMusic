@@ -5,6 +5,7 @@
 
 .container-fluid {
     padding-left: 240px;
+    padding-right: 15px; /* Добавим отступ справа */
 }
 
 .main-content {
@@ -23,7 +24,6 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     width: 100%;
-    max-width: 1200px;
 }
 
 .playlist-item, .track-item {
@@ -113,7 +113,7 @@
     align-items: center;
     justify-content: center;
     width: 230px;
-    height: 250px;
+    height: 280px;
     background-color: #2a2a2a;
     border: 1px solid #333333;
     border-radius: 8px;
