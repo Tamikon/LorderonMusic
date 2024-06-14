@@ -49,12 +49,6 @@ namespace WebApplication1.Areas.Home.Controllers
             return View("PlaylistDetails", playlist);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteTrack(int trackId, int playlistId)
-        {
-            await _musicRepository.DeleteTrack(trackId);
-            return RedirectToAction("PlaylistDetails", new { playlistId });
-        }
 
         [HttpPost]
         public async Task<IActionResult> AddMusic(int playlistId, string youTubeLink)
@@ -83,6 +77,13 @@ namespace WebApplication1.Areas.Home.Controllers
             };
 
             await _musicRepository.AddTrack(music);
+            return RedirectToAction("PlaylistDetails", new { playlistId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTrack(int trackId, int playlistId)
+        {
+            await _musicRepository.DeleteTrack(trackId);
             return RedirectToAction("PlaylistDetails", new { playlistId });
         }
     }
