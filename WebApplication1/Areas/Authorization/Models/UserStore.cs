@@ -32,24 +32,6 @@ namespace WebApplication1.Areas.Authorization.Models
                     {
                         existingUser.Servers.Add(server);
                     }
-                    else
-                    {
-                        existingServer.Name = server.Name;
-                        existingServer.AvatarUrl = server.AvatarUrl;
-                        foreach (var playlist in server.Playlists)
-                        {
-                            var existingPlaylist = existingServer.Playlists.Find(p => p.Id == playlist.Id);
-                            if (existingPlaylist == null)
-                            {
-                                existingServer.Playlists.Add(playlist);
-                            }
-                            else
-                            {
-                                existingPlaylist.Name = playlist.Name;
-                                existingPlaylist.Musics = playlist.Musics;
-                            }
-                        }
-                    }
                 }
 
                 await _userRepository.UpdateUser(existingUser);

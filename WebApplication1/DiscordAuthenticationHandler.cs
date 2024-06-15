@@ -92,7 +92,6 @@ namespace WebApplication1
                     DiscordServerId = guild.GetProperty("id").GetString(),
                     Name = guild.GetProperty("name").GetString(),
                     AvatarUrl = avatarUrl,
-                    Playlists = new List<Playlist>()
                 };
 
                 servers.Add(server);
